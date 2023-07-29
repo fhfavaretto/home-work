@@ -1,0 +1,9 @@
+Dados de acesso da VPN e do servidor.
+
+Usuario:totvs1
+Senha:almathi2022
+Ip Servidor:192.168.0.200
+
+
+administrador - login
+agbsul2020@ - senha

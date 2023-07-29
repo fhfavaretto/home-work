@@ -1,0 +1,55 @@
+COD.REGISTRO   0010010"0"                                                         
+COD.ARQUIVO    0020020"1"                                                         
+LITERAL ARQUIVO0030090"REMESSA"                                                   
+COD.SERVICO    0100110"01"                                                        
+LITERAL SERVICO0120260"COBRANCA"                                                  
+CODIGO EMPRESA 0270460"00000000000000CV"                                          
+NOME DO CLIENTE0470760SUBSTR(SM0->M0_NOME,1,30)                                   
+COD.BANCO      0770790"637"                                                       
+NOME DO BANCO  0800940"BANCO SOFISA SA"                                           
+DATA GRAVACAO  0951000GRAVADATA(DDATABASE,.F.)                                    
+BRANCOS        1013940SPACE(294)                                                  
+NUM.SEQUENCIAL 3954000"000001"                                                    
+COD.REGISTRO   0010010"1"                                                         
+COD.DE INSCRICA0020030"02"                                                        
+NUM.INSCRICAO  0040170SM0->M0_CGC                                                 
+CODIGO EMPRESA 0180370"00000000000000CV"                                          
+USO EMPRESA    0380620SE1->E1_PREFIXO+SE1->E1_NUM+SE1->E1_PARCELA+"06"            
+NOSSO NUMERO   0630700"00000000"                                                  
+NOSSO NUM CORRE0710830SPACE(13)                                                   
+BRANCOS        0841070SPACE(24)                                                   
+CARTEIRA       1081080"1"                                                         
+COD.OCORRENCIA 1091100"01"                                                        
+SEU NUMERO     1111200SE1->E1_PREFIXO+SE1->E1_NUM+SE1->E1_PARCELA                 
+VENCIMENTO     1211260GravaData(SE1->E1_VENCTO,.F.,1)                             
+VALOR          1271392STRZERO(INT(ROUND(SE1->E1_VALOR*100,2)),13)                 
+CODIGO BANCO   1401420"637"                                                       
+AGENCIA COBRADO1431460"0000"                                                      
+DAC AG COBRADOR1471470"0"                                                         
+ESPECIE        1481490"01"                                                        
+ACEITE         1501500"N"                                                         
+DATA EMISSAO   1511560GravaData(SE1->E1_EMISSAO,.F.,1)                            
+INSTRUCAO 1    1571580"00"                                                        
+INSTRUCAO 2    1591600"00"                                                        
+JUROS DE MORA  1611730STRZERO(INT(SE1->E1_VALOR*0.2),13)                          
+DESCONTO DATA  1741790"000000"                                                    
+VALOR DESCONTO 1801922"0000000000000"                                             
+VALOR IOF      1932052"0000000000000"                                             
+VALOR ABATIMENT2062182"0000000000000"                                             
+COD INSCRICAO  2192200IIf(Len(AllTrim(SA1->A1_CGC))==14,"02","01")                
+NUM INSCRICAO  2212340SA1->A1_CGC                                                 
+RAZAO SOCIAL   2352640SUBST(SA1->A1_NOME,1,30)                                    
+BRANCOS        2652740SPACE(10)                                                   
+ENDERECO       2753140EXECBLOCK("END",.F.,.F.)                                    
+BAIRRO         3153260EXECBLOCK("BAIRRO",.F.,.F.)                                 
+CEP            3273340IIF(!EMPTY(SA1->A1_CEPCOB),SA1->A1_CEPCOB,SA1->A1_CEP)      
+CIDADE SACADO  3353490EXECBLOCK("MUN",.F.,.F.)                                    
+UF             3503510EXECBLOCK("EST",.F.,.F.)                                    
+SACADOR        3523810                                                            
+BRANCOS        3823910SPACE(10)                                                   
+PRAZO PROTESTO 3923930"05"                                                        
+MOEDA          3943940"0"                                                         
+NUMERO SEQUENCI3954000Incrementa()                                                
+REGISTRO       0010010"9"                                                         
+BANCO          0023940SPACE(393)                                                  
+NUMERO SEQ     3954000Incrementa()                                                

@@ -1,0 +1,21 @@
+Registro       001001 "0"                                                         
+Cod. Remessa   002002 "1"                                                         
+Lit. Remessa   003009 "REMESSA"                                                   
+Cod. Servico   010011 "08"                                                        
+Lit Servico    012025 "CONTAS A PAGAR"                                            
+Ag. do Cliente 026029 "0000"                                                      
+Conta Cliente  030035 "000000"                                                    
+DV do Cliente  036036 "7"                                                         
+Nome do Cliente037066 SUBS(SM0->M0_NOMECOM,1,30)                                  
+Cod Banco      067069 "409"                                                       
+Nome do Banco  070084 "UNIBANCO      "                                            
+Data Gravacao  085090 GRAVADATA(DDATABASE,.F.,5)                                  
+Reservado      091314 SPACE(224)                                                  
+Sequencial     315320 '000001'                                                    
+Cod Registro   001001 "2"                                                         
+Ag Cliente     002005 "0000"                                                      
+Conta Cliente  006011 "000000"                                                    
+DV do Cliente  012012 "7"                                                         
+Reservado      013032 SPACE(20)                                                   
+Banco Favorecid033036 "0409"                               
+Ag Favorecido  00000

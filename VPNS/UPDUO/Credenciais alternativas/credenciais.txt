@@ -1,0 +1,8 @@
+api		192.168.24.228
+azuredevops01	192.168.24.233
+fabio		192.168.24.215
+fabiombp	192.168.24.220
+glpi		192.168.24.229
+monitoramento	192.168.24.223
+monitoramento2	192.168.24.231
+zabbix	        192.168.24.127

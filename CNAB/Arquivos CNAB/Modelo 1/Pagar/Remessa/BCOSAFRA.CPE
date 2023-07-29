@@ -1,0 +1,58 @@
+Registro Header00100100                                                           
+Arquivo Remessa00200201                                                           
+Arquivo Extenso0030090"REMESSA"                                                   
+Tipo Servico   010011011                                                          
+Servico Extenso0120260"PAGTOS FORNECED"                                           
+Ident. Empresa 0270340Subs(SEE->EE_CODEMP,1,8)                                    
+Brancos        0350370                                                            
+Cod. Agencia   0380440"0000000"                                                   
+Brancos        0450460                                                            
+Nome Cliente   0470760Subs(SM0->M0_NOMECOM,1,30)                                  
+Bco Compensacao0770790"422"                                                       
+Nome Banco     0800940"BANCO SAFRA S/A"                                           
+Dta Grav Arquiv0951000GravaData(dDataBase,.F.,1)                                  
+Brancos        1013880                                                            
+No Seq Arquivo 3893940SUBS(SEE->EE_ULTDSK,1,6)                                    
+No Seq Registro3954000000001                                                      
+Registro Detalh00100101                                                           
+Codigo CFG/CGC 0020030"01"                                                        
+Numero CPF/CGC 0040170SM0->M0_CGC                                                 
+Cod Empresa    0180250Subs(SEE->EE_CODEMP,1,8)                                    
+Brancos        0260280                                                            
+Cod Agencia    0290370"0000000  "                                                 
+Numero Titulo  0380620ExecBlock("NTITSE2",.F.,.F.)                                
+No CPF/CGC Forn0630760SA2->A2_CGC                                                 
+Tipo Compromis 0770790"DUP"                                                       
+Num.Compromisso0800890SE2->E2_PREFIXO+SE2->E2_NUM+SE2->E2_PARCELA                 
+Seq Compromisso0900900                                                            
+Brancos        0910920                                                            
+Brancos        0931070                                                            
+Cod Operacao   1081080"C"                                                         
+Tipo Operacao  1091100"04"                                                        
+N.Compromisso  1111200SE2->E2_PREFIXO+SE2->E2_NUM+SE2->E2_PARCELA                 
+Data Vencimento1211260GravaData(SE2->E2_VENCTO,.F.,1)                             
+Valor Orig Tit 1271390STRZERO(SE2->E2_SALDO*100,13)                               
+Tipo Pagamento 1401420"COB"                                                       
+Banco Destinat 1431450Subs(SE2->E2_CBARRA,1,3)                                    
+Agencia Destin 1461520"0000000"                                                   
+Cod Compensacao1531550                                                            
+C.C. Destinat  1561650"0000000000"                                                
+Nome Ag Destin 1661850                                                            
+Ag Pagamento   1861920"0009700"                                                   
+Desc Compromis 1932470SPAC(55)                                                    
+Bco Poratador  2482500Subs(SE2->E2_CBARRA,1,3)                                    
+Valor Abatiment25126300                                                           
+Nome Fornecedor2643470Subs(SA2->A2_NOME,1,40)+Subs(SE2->E2_CBARRA,1,44)           
+Juros/Multa    3483600"0000000000000"                                             
+Data Pagamento 3613660GravaData(SE2->E2_VENCTO,.F.,1)                             
+Valor Pagto    3673790STRZERO(SE2->E2_SALDO*100,13)                               
+Moeda Compromis3803830"R$"                                                        
+Tipo Carteira  3843870                                                            
+Brancos        3883940                                                            
+Num Seq Regist 3954000Incrementa()                                                
+Reg Trailer    00100109                                                           
+Somat CGC/CPF  0020190                                                            
+Somat Vlr Orig 0200370                                                            
+Somat Data Pagt0380550                                                            
+Filler         0563940                                                            
+No. Sequenc    3954000Incrementa()                                                

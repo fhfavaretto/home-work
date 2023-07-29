@@ -1,0 +1,52 @@
+Codigo Registro00100100                                                           
+Codigo Remessa 00200201                                                           
+Literal Remessa0030090'       '                                                   
+Codigo Servico 010011003                                                          
+Literal Servico0120120' '                                                         
+Tarifa         013017000000                                                       
+Brancos        0180260space(9)                                                    
+Pref. Agencia  02703000000                                                        
+Digito Verifica03103100                                                           
+Conta          0320400000000000                                                   
+Digito Verifica04104104                                                           
+Brancos        0420460Space(5)                                                    
+Nome Empresa   0470760Subs(SM0->M0_NOMECOM,1,30)                                  
+Codigo BB      0770790001                                                         
+Codigo Conv.   0800850000000                                                      
+Tipo Retorno   0860880"CRD"                                                       
+Livre          0890980space(10)                                                   
+Retorno        099100000                                                          
+Uso Banco      1011030space(3)                                                    
+Brancos        1041660space(63)                                                   
+Livre          1671700space(4)                                                    
+Brancos        1711850space(15)                                                   
+Uso Banco      1861940space(9)                                                    
+Sequencial     1952000"000001"                                                    
+Codigo Registro00100101                                                           
+Codigo Inscr   0020020" "                                                         
+Ind.Conferencia00300301                                                           
+Codigo CGC     0040150space(12)                                                   
+DV do CGC      0160170" "                                                         
+Prefixo Agencia0180210"0000"                                                      
+DV Agencia     0220220"0"                                                         
+Conta Empresa  0230310"000000000"                                                 
+DV Conta       0320320"4"                                                         
+Livre          0330420space(10)                                                   
+Brancos        0430560space(14)                                                   
+Cod. Compensa. 0570590"000"                                                       
+Cod. Banco     0600620"  "                                                        
+Agencia Depos. 0630660STRZERO(VAL(SUBST(SRA->RA_BCDEPSA,4,4)),4)                  
+DV Agencia     0670670SUBST(SRA->RA_BCDEPSA,8,1)                                  
+Conta          0680790STRZERO(VAL(SUBST(SRA->RA_CTDEPSA,1,9)),12)                 
+DV Conta       0800800SUBST(SRA->RA_CTDEPSA,10,1)                                 
+Brancos        0810820"  "                                                        
+Nome Favorec.  0831220SUBST(SRA->RA_NOME,1,40)                                    
+Data Pagto     1231280Gravadata(ddatapgto,.f.,1)                                  
+Valor          1291410NVALOR                                                      
+Cod. Servico   1421440"001"                                                       
+Livre          1451840space(40)                                                   
+Tabela         1851940"00"                                                        
+Sequencia      1952000Incrementa()                                                
+Codigo Registro00100109                                                           
+Brancos        0021940                                                            
+Numero Sequenc 1952000Incrementa()                                                

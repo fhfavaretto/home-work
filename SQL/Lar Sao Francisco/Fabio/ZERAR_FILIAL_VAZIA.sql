@@ -1,0 +1,1 @@
+UPDATE SC7010 SET D_E_L_E_T_ = '*', R_E_C_D_E_L_ = R_E_C_N_O_ WHERE C7_FILIAL = ' ';

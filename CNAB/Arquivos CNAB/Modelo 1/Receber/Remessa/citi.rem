@@ -1,0 +1,52 @@
+Ident Registro 00100100                                                           
+Ident Arquivo  00200201                                                           
+Ident Arq Exten0030090"REMESSA"                                                   
+Tipo Servico   010011001                                                          
+Tp Serv Extenso0120260"COBRANCA"                                                  
+Ident Empresa  0270460ExecBlock("RFINIDEM",.F.,.F.)                               
+Nome Empresa   0470760SUBSTR(SM0->M0_NOMECOM,1,30)                                
+Num Citibank   0770790"745"                                                       
+Nome banco     0800940"CITIBANK"                                                  
+Dt Gravaco     0951000GRAVADATA(dDataBase,.F.)                                    
+Densidade Arq  1011050"00000"                                                     
+Uni Dens Grav  1061080"BPI"                                                       
+Unid Vol Fisico1093940                                                            
+Num Seuquencial3954000"000001"                                                    
+Id Registro    00100101                                                           
+Id Tipo Insc   002003002                                                          
+Insc Empresa   0040170SM0->M0_CGC                                                 
+Id Empresa     0180370ExecBlock("RFINIDEM",.F.,.F.)                               
+Ident Titulo   0380620SE1->E1_PREFIXO+SE1->E1_NUM+SE1->E1_PARCELA+"06"            
+Complemento    0630640"00"                                                        
+Num Bancario   0650760"000000000000"                                              
+Brancos        0770820Space(6)                                                    
+Data Seg Desc  0830880"000000"                                                    
+Valor Seg Desc 0891010"0000000000000"                                             
+Brancos        1021070Space(6)                                                    
+Cod Carteira   1081080Iif(SE1->E1_SITUACA=="1","1","2")                           
+Cod Ocorrencia 1091100IIF(EMPTY(SE1->E1_OCORREN),"01",SE1->E1_OCORREN)            
+Seu Numero     1111200SE1->E1_PREFIXO+SE1->E1_NUM+SE1->E1_PARCELA                 
+Dt Venc        1211260GravaData(SE1->E1_VENCTO,.F.)                               
+Vl Nominal     1271390STRZERO(INT(ROUND(SE1->E1_VALOR*100,2)),13)                 
+Num Citibank   1401420"745"                                                       
+Pref Ag Cobrado1431470"00000"                                                     
+Especie        1481490"01"                                                        
+Iden Aceite    1501500"N"                                                         
+Dt Emissao     1511560GravaData(SE1->E1_EMISSAO,.F.)                              
+Inst Titulo    1571580"06"                                                        
+Num dias Inst  1591600"05"                                                        
+Juros          1611730STRZERO(INT(SE1->E1_VALJUR*100),13)                         
+Dt Limite Desc 1741790"000000"                                                    
+Valor Desc     1801920"0000000000000"                                             
+IOF            1932050"0000000000000"                                             
+Vlr Abat       2062180STRZERO(INT(SE1->E1_DESCONT*100),13)                        
+Tipo Incs sacad2192200IIf(Len(AllTrim(SA1->A1_CGC))==14,"02","01")                
+Num Insc Sacado2212340SUBSTR(SA1->A1_CGC,1,14)                                    
+Nome Sacado    2352740SubStr(SA1->A1_NOME,1,40)                                   
+Dados Cli      2753510EXECBLOCK("DADOSCLI",.F.,.F.)                               
+Sacador        3523930Space(42)                                                   
+Cod Moeda      3943940"9"                                                         
+Num Sequencial 3954000incrementa()                                                
+Cod Resgistro  0010010"9"                                                         
+Brancos        0023940Space(393)                                                  
+Num Sequencial 3954000incrementa()                                                

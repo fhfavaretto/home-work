@@ -1,0 +1,180 @@
+ACODIGO BCO     0010030"341"                                                       
+ALOTE SERVICO   0040070"0000"                                                      
+AREG.HEADER ARQ.0080080"0"                                                         
+AFILLER         0090140                                                            
+AVERS.LAYOUT ARQ0150170"040"                                                       
+ATIPO INSCRICAO 0180180"2"                                                         
+ANUM. INSCRICAO 0190320SM0->M0_CGC                                          
+AFILLER         0330520                                                            
+AAGENCIA        0530570STRZERO(VAL(SEE->EE_AGENCIA),5)                             
+AFILLER         0580580                                                            
+ACONTA CORRENTE 0590700LEFT(STRZERO(VAL(SEE->EE_CONTA),13),12)                     
+ABRANCOS        0710710                                                            
+ADIGITO DA CTA  0720720RIGHT(ALLTRIM(SEE->EE_CONTA),1)                             
+ANOME DA EMPRESA0731020Subs(SM0->M0_NOMECOM,1,30)                            
+ANOME DO BANCO  1031320"BANCO ITAU SA"                                             
+AFILLER         1331420                                                            
+AREMESSA        1431430"1"                                                         
+ADT.GERACAO     1441510GRAVADATA(DDATABASE,.F.,5)                                  
+AHR.GERACAO     1521570STRTRAN(TIME(),":")                                         
+ACOMPL.REGISTRO 1581660STRZERO(0,9)                                                
+ADENSIDADE GRAV.1671710"00000"                                                     
+AFILLER         1722400                                                            
+BCODIGO BCO     0010030"341"                                                       
+BLOTE SERVICO   0040070"0001"                                                      
+BREG HEADER LOTE0080080"1"                                                         
+BTIPO OPERACAO  0090090"C"                                                         
+BTIPO SERVICO   0100110ALLTRIM(SEA->EA_TIPOPAG)                                    
+BFORMA LCTO     0120130ALLTRIM(SEA->EA_MODELO)                                     
+BVERSAO LAYOUT  0140160"030"                                                       
+BFILLER         0170170                                                            
+BINSCR. TIPO    0180180"2"                                                         
+BINSCR. NUMERO  0190320SM0->M0_CGC                                             
+BFILLER         0330520                                                            
+BAENCIA DA CTA  0530570STRZERO(VAL(SEE->EE_AGENCIA),5)                             
+BFILLER         0580580                                                            
+BCTA CORRENTE   0590700LEFT(STRZERO(VAL(SEE->EE_CONTA),13),12)                     
+BFILLER         0710710                                                            
+BDAC DA AG./CTA 0720720RIGHT(ALLTRIM(SEE->EE_CONTA),1)                             
+BNOME EMPRESA   0731020Subs(SM0->M0_NOMECOM,1,30)                            
+BMENSAGEM       1031320                                                            
+BCOMPL.HIST.C/C 1331420                                                            
+BLOGRADOURO     1431720"XXXXXXXXXXXXXXXXXXXXXXXXXXX "                              
+BNUMERO         1731770"00000"                                                     
+BCOMPLEMENTO    1781920                                                            
+BCIDADE         1932120"XXXXXX  "                                                  
+BCEP            2132200"00000000"                                                  
+BESTADO         2212220"XX"                                                        
+BFILLER         2232400                                                            
+CCODIGO BCO     0010030"341"                                                       
+CLOTE SERVICO   0040070"0001"                                                      
+CREG HEADER LOTE0080080"1"                                                         
+CTIPO OPERACAO  0090090"C"                                                         
+CTIPO SERVICO   0100110SEA->EA_TIPOPAG                                             
+CFORMA LCTO     0120130SEA->EA_MODELO                                              
+CVERSAO LAYOUT  0140160"030"                                                       
+CBRANCOS        0170170                                                            
+CINSCR.TIPO     0180180"2"                                                         
+CINSCR. NUMERO  0190320SM0->M0_CGC                                            
+CBRANCOS        0330520                                                            
+CAGENCIA        0530570STRZERO(VAL(SEE->EE_AGENCIA),5)                             
+CBRANCOS        0580580                                                            
+CCTA CORRENTE   0590700LEFT(STRZERO(VAL(SEE->EE_CONTA),13),12)                     
+CBRANCOS        0710710                                                            
+CDAC DA AG./CTA.0720720RIGHT(ALLTRIM(SEE->EE_CONTA),1)                             
+CNOME DA EMPRESA0731020Subs(SM0->M0_NOMECOM,1,30)                            
+CMENSAGEM       1031320                                                            
+CCOMPL.HIST.C/C 1331420                                                            
+CLOGRADOURO     1431720"XXXXXXXXXXXXXXXXXXXXXXXXXXX "                              
+CNUMERO         1731770"00000"                                                     
+CCOMPLEMENTO    1781920                                                            
+CCIDADE         1932120"XXXXXX  "                                                  
+CCEP            2132200"00000000"                                                  
+CESTADO         2212220"XX"                                                        
+CBRANCOS        2232400                                                            
+DCODIGO BCO     0010030"341"                                                       
+DLOTE SERVICO   0040070"0001"                                                      
+DREGISTRO       0080080"5"                                                         
+DFILLER         0090170                                                            
+DQTDE REG.      0180230nSEQ+2                                                      
+DVLR CREDITO    0240410SOMAVALOR()                                                 
+DZEROS          0420590STRZERO(0,18)                                               
+DFILLER         0602400                                                            
+ECODIGO BCO     0010030"341"                                                       
+ELOTE SERVICO   0040070"0001"                                                      
+EREGISTRO       0080080"5"                                                         
+EBRANCOS        0090170                                                            
+EQTDE REG.      0180230nSEQ+2                                                      
+EVLR CREDITO    0240410SOMAVALOR()                                                 
+EZEROS          0420590STRZERO(0,18)                                               
+EBRANCOS        0602400                                                            
+FCODIGO BCO     0010030"341"                                                       
+FLOTE DE SERVICO0040070"9999"                                                      
+FREG TRAILER ARQ0080080"9"                                                         
+FFILLER         0090170                                                            
+FQTD LOTES      0180230"000001"                                                    
+FQTD REGISTRO   0240290nSEQ+4                                                      
+FFILLER         0302400                                                            
+GCODIGO BCO     0010030"341"                                                       
+GTITULO         0040070"0001"                                                      
+GRG.DETALHE LOTE0080080"3"                                                         
+GSEQ.REG.LOTE   0090130INCREMENTA()-1                                              
+GCOD.SEQ.REG.DET0140140"A"                                                         
+GTIPO DE MOV.   0150170"000"                                                       
+GZEROS          0180200"000"                                                       
+GCOD BCO FAVOR  0210230SA2->A2_BANCO                                               
+GAGENCIA FAVOR  0240280STRZERO(VAL(SA2->A2_AGENCIA),5)                             
+GFILLER         0290290                                                            
+GCONTA FAVORECID0300410LEFT(STRZERO(VAL(SA2->A2_NUMCON),13),12)                    
+GBRANCOS        0420420                                                            
+GDAC            0430430RIGHT(ALLTRIM(SA2->A2_NUMCON),1)                            
+GNOME FAVORECIDO0440730LEFT(SA2->A2_NOME,30)                                       
+GN.DOCTO ATRIBUI0740890SE2->E2_PREFIXO+SE2->E2_NUM+SE2->E2_PARCELA+SE2->E2_TIPO    
+GFILLER         0900930                                                            
+GDT CREDITO     0941010GRAVADATA(SE2->E2_VENCREA,.F.,5)                            
+GTIPO DA MOEDA  1021040"REA"                                                       
+GFILLER         1051190"000000000000000"                                           
+GVALOR LCTO     1201340SE2->E2_SALDO*100                                           
+GNUM.DOC.NO BCO.1351490                                                            
+GFILLER         1501540                                                            
+GDT EFET.DO PAG.1551620"00000000"                                                  
+GVAL.EFET.DO PAG1631770"000000000000000"                                           
+GINF.COMPL.HIST.1781950                                                            
+GFILLER         1961970                                                            
+GIDENT.DOC/OP/CH1982030"000000"                                                    
+GINSCR.FAVORECID2042170SA2->A2_CGC                                                 
+GFILLER         2182290                                                            
+GAVISO          2302300"0"                                                         
+GFILLER         2312400                                                            
+JCODIGO BCO     0010030"341"                                                       
+JLOTE SERVICO   0040070"0001"                                                      
+JRG.DETALHE LOTE0080080"3"                                                         
+JSEQ.REG.LOTE   0090130INCREMENTA()-1                                              
+JCOD.SEQ.REG.DET0140140"J"                                                         
+JTIPO DE MOV.   0150170"000"                                                       
+JCOD BAR BCO FAV0180200SUBSTR(SE2->E2_CODBAR,1,3)                                  
+JCOD BAR MOEDA  0210210SUBSTR(SE2->E2_CODBAR,4,1)                                  
+JCOD BAR DIG VER0220220SUBSTR(SE2->E2_CODBAR,33,1)                                 
+JCOD BAR FAT VEN0230360SUBSTR(SE2->E2_CODBAR,34,14))                               
+JCOD BAR CPO LIV0370610EXECBLOCK("CAMPFREE")                                       
+JNOME FAVOR     0620910SA2->A2_NOME                                                
+JDT VENCTO      0920990GRAVADATA(SE2->E2_VENCTO,.F.,5)                             
+JVALOR LCTO     1001140SE2->E2_SALDO*100                                           
+JVAL DESC+ABATIM1151290STRZERO(0,15)                                               
+JVAL MORA+MULTA 1301440STRZERO(0,15)                                               
+JDT EFET.DO PAG 1451520GRAVADATA(SE2->E2_VENCREA,.F.,5)                            
+JVAL.EFET.DO PAG1531670SE2->E2_SALDO*100                                           
+JZEROS          1681820STRZERO(0,15)                                               
+JSeu Numero     1832020NUMTITULO()                                                 
+JBRANCOS        2032150                                                            
+JNUM.DOC.NO BCO.2162300                                                            
+JOCORRENCIA     2312320                                                            
+NCOD BANCO      0010030"341"                                                       
+NCOD LOTE       0040070"0001"                                                      
+NTIPO REGISTRO  0080080"3"                                                         
+NNUM REGISTRO   0090130INCREMENTA()-1                                              
+NSEGUIMENTO     0140140"N"                                                         
+NTIPO MOVIMENTO 0150170"000"                                                       
+NDADOS TRIBUTO  0181950EXECBLOCK("ENVTRIB")                                        
+NSEU NUMERO     1962150SE2->(E2_PREFIXO+E2_NUM+E2_PARCELA+E2_TIPO+E2_FORNECE)      
+NNOSSO NUMERO   2162300                                                            
+NOCORRENCIAS    2312400                                                            
+OCOD BANCO      0010030"341"                                                       
+OCOD DO LOTE    0040070"0001"                                                      
+OTIPO REGISTRO  0080080"3"                                                         
+ONUM REGISTRO   0090130INCREMENTA()-1                                              
+OSEGUIMENTO     0140140"O"                                                         
+OTIPO MOVIMENTO 0150170"000"                                                       
+OCODIGO BARRAS  0180650SE2->E2_CODBAR                                              
+ONOME CONCESSION0660950SA2->A2_NOME                                                
+ODATA VENCIMENTO0961030GRAVADATA(SE2->E2_VENCTO,.F.,5)                             
+OMOEDA          1041060"REA"                                                       
+OQUANT MOEDA    1071218STRZERO(0,15)                                               
+OVALOR A PAGAR  1221362STRZERO(SE2->E2_SALDO*100,15)                               
+ODATA PAGAMENTO 1371440GRAVADATA(SE2->E2_VENCREA,.F.,5)                            
+OVALOR PAGO     1451592STRZERO(0,15)                                               
+OBRANCOS        1601740SPACE(15)                                                   
+OSEU NUMERO     1751940SE2->(E2_PREFIXO+E2_NUM+E2_PARCELA+E2_TIPO+E2_FORNECE)      
+OBRANCOS        1952150                                                            
+ONOSSO NUMERO   2162300                                                            
+OOCORRENCIAS    2312400                                                            

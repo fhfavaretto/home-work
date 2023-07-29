@@ -1,0 +1,75 @@
+Codigo Registro00100100                                                           
+Codigo Remessa 00200201                                                           
+Literal Remessa0030090'REMESSA'                                                   
+Codigo Servico 010011001                                                          
+Literal Servico0120190'COBRANCA'                                                  
+Brancos        0200260Space(07)                                                   
+Prefix.Ag.     02703000000                                                        
+Dv.Ag.         03103100                                                           
+Cod.C/C        03203900000                                                        
+Dv.C/C         04004005                                                           
+Nr.Convenio    0410460000000                                                      
+Nome da Empresa0470760Subs(SM0->M0_NOMECOM,1,30)                                  
+Cod/Nome Banco 0770940'001BANCO DO BRASIL'                                        
+Data Gravacao  0951000GravaData(Date(),.F.,1)                                     
+Sequec.Remessa 1011070IncRementa()                                                
+Brancos        1083830Space(276)                                                  
+Dest.Arq-Branco3843850Space(02)                                                   
+ BBCBR - Branco3863880Space(03)                                                   
+Brancos        3893940Space(06)                                                   
+Numero Sequenc.3954000000001                                                      
+Codigo Registro00100101                                                           
+Codigo Inscr   002003002                                                          
+Numero CGC     0040170SM0->M0_CGC                                                 
+Prefix.Ag.     01802100000                                                        
+Dv.Ag.         02202200                                                           
+Nr.C/C         02303000000                                                        
+Dv.C/C         03103100                                                           
+Nr.Convenio    0320370000000                                                      
+Numero Titulo  0380620SE1->E1_PREFIXO+SE1->E1_NUM+SE1->E1_PARCELA+SE1->E1_TIPO+"F"
+Nosso Numero   06307300000000000                                                  
+Dv.Nosso Num.  074074000                                                          
+               075076000                                                          
+Indicat.Grupo  077078000                                                          
+Brancos        0790810Space(03)                                                   
+Indicat.Sacador0820820                                                            
+Prefix.titulo  0830850"AI"                                                        
+Variacao Cartei0860880019                                                         
+Cont.Caucao    089089000                                                          
+Cod.Responsabil090094000000                                                       
+Dv. Responsabil09509500                                                           
+Num.Bordero    0961010000000                                                      
+Brancos        1021066                                                            
+Carteira       1071080'11'                                                        
+Registro titulo1091100'01'                                                        
+Seu Numero     1111200SE1->E1_PREFIXO+SE1->E1_NUM+SE1->E1_PARCELA                 
+Vencimento     1211260SE1->E1_VENCTO                                              
+Valor Titulo   1271390STRZERO(INT(SE1->E1_SALDO*100),13)                          
+Banco          1401420'001'                                                       
+Prefix.Agencia 14314600000                                                        
+Dv.    Agencia 14714700                                                           
+Especie Titulo 1481490"01"                                                        
+Aceite         1501500"N"                                                         
+Data Emissao   1511560SE1->E1_EMISSAO                                             
+Inst. Codfi.01 1571580"01"                                                        
+Inst. Codfi.02 1591600"05"                                                        
+Juros Mora Dia 1611732STRZERO(INT(SE1->E1_VALJUR*100),13)                         
+Data Descontos 1741790000000                                                      
+Valor Descontos1801920STRZERO(INT(SE1->E1_DESCFIN*100),13)                        
+Valor IOF      193205000000000000                                                 
+Valor Abatiment206218000000000000                                                 
+Tipo CGC / CPF 2192200IIF(Len(Alltrim(SA1->A1_CGC))>11,"02","01")                 
+CGC Do Cliente 2212340Strzero(Val(SA1->A1_CGC),14)                                
+Nome Cliente   2352710Substr(SA1->A1_NOME,1,37)                                   
+brancos        2722740                                                            
+Endereco Sacado2753110Substr(SA1->A1_END,1,37)                                    
+Brancos        3123260                                                            
+Cep            3273340SA1->A1_CEP                                                 
+Municipio      3353490SA1->A1_MUN                                                 
+Estado         3503510SA1->A1_EST                                                 
+Observacoes    3523910                                                            
+Brancos        3923940Space(03)                                                   
+Numero Seq.    3954000IncRementa()                                                
+Codigo Registro00100109                                                           
+Brancos        0023940Space(393)                                                  
+Numero Sequenc 3954000Incrementa()                                                

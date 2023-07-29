@@ -1,0 +1,126 @@
+#Include "Protheus.ch"
+#Include "TopConn.ch"
+#INCLUDE 'Ap5Mail.ch'
+#include 'parmtype.ch'
+#Include "TOTVS.ch"
+
+
+User Function FUNCXUPDUO()
+
+
+
+
+RETURN
+
+
+// FUNCAO PARA ENVIO DE EMAIL
+User Function UPDUO01(cPara , cSubject, cMsg)
+	Local oMail , oMessage
+	Local lRet := .T.
+	Local cSMTPServer := 'mail.upduo.com.br'
+	Local cSMTPUser :=   'auditoria_sistema@upduo.com.br'
+	Local cSMTPPass :=   'Mustaine25%#!'
+	Local cMailFrom :=   'auditoria_sistema@upduo.com.br'
+	Local nPort := 587
+	Local lUseAuth := .T.
+	Local cCopia := ''
+	Local cMailError := ""
+	Local nErro, nErroAuth
+
+	//Faz a conexão com o eMail
+	oMail := TMailManager():New()
+	oMail:setUseSSL( .T. ) // Usa SSL na conexao, contas do GMAIL usam SSL.
+	oMail:SetUseTLS( .T. )
+	oMail:Init( '', cSMTPServer , cSMTPUser, cSMTPPass, 0, nPort )
+	oMail:SetSmtpTimeOut( 30 )
+	nErro := oMail:SmtpConnect()
+
+	If lUseAuth
+		nErroAuth := 0
+		ErroAuth := oMail:SmtpAuth(cSMTPUser , cSMTPPass)
+
+		If nErroAuth <> 0
+			cMailError := oMail:GetErrorString(nErroAuth)
+			cMailError := Iif(Empty(cMailError), '***Unknown Error***', cMailError)
+			lRet := .F.
+		EndIf
+	EndIf
+
+	//Se houve algum outro erro
+	If nErro <> 0
+		cMailError := oMail:GetErrorString(nErro)
+		cMailError := Iif(Empty(cMailError), '***Unknown Error***', cMailError)
+		oMail:SMTPDisconnect()
+		lRet := .F.
+	EndIf
+	If lRet
+		oMessage := TMailMessage():New()
+		oMessage:Clear()
+		oMessage:cFrom := cMailFrom
+		oMessage:cTo := cPara
+		If !Empty(cCopia)
+			oMessage:cCc := cCopia
+		EndIf
+		oMessage:cSubject := cSubject
+		oMessage:cBody := cMsg
+
+		nErro := oMessage:Send( oMail )
+		If nErro <> 0
+			cMailError := oMail:GetErrorString(nErro)
+			cMailError := Iif(Empty(cMailError), '***Unknown Error***', cMailError)
+			lRet := .F.
+		EndIf
+		oMail:SMTPDisconnect()
+	EndIf
+
+Return lRet
+
+
+
+
+// abre um link para falar comigo
+User Function UPDUO02()
+
+	ShellExecute( "open", "https://api.whatsapp.com/send?phone=5517997141441&text=Tenho%20duvidas%20sobre%20as%20rotinas%20de%20ajuda%20ao%20consultor", "", "", 1 )
+
+return()
+
+User Function UPDUO03()
+
+	Local cUser := PswChave(RetCodUsr())
+	Local cMenu := CFILEXNU
+	Local cEmpresas := FWLoadSM0()[1][6]
+	Local CFilial   := FWLoadSM0()[1][7]
+	Local cAssunto := 'Auditoria Abertura do Sistema'
+	Local cDestinatario := ''
+	Local cMensagem := ''
+	FWLoadSM0(.F., .T.) // chama função que realiza a abertura dos prametros iniciais do sistema
+
+
+	if cUser == "Administrador" .or. cUser == "UPDUO01" .or. cUser == "UPDUO02"
+
+		//Monta a mensagem do e-Mail
+		cMensagem := "O Consultor : " + Alltrim(LogUserName()) + "<br>"
+		cMensagem += "Com o Usuario:" + Alltrim(cUser) + "<br>"
+        cMensagem += "No ambiente:" +  GetEnvServer() + "<br>"
+		cMensagem += "Na empresa: "+ cEmpresas +"<br>"
+		cMensagem += "Na Filial: "+ CFilial +"<br>"
+		cMensagem += "No Modulo:  "+ cMenu +"<br>"
+		cMensagem += "<b>Entrou no sistema</b><br>"
+		cMensagem += "Na Data de: " + DtoC( Date()) + " às " + Time() + "<br>"
+		cMensagem += "<br> na máquina <b>" + Lower(ComputerName()) + Upper(" (IP "+ GetClientIP()+" / PC: " +GetComputerName()+")</b>")
+
+		//Dispara o e-Mail para o destinatario configurado
+		cDestinatario := 'fabio.favaretto@upduo.com.br'
+		U_UPDUO01(cDestinatario, cAssunto, cMensagem)
+
+	else
+		ConOut("Usuário Entrou: " + cUser)
+	endif
+
+
+
+
+return()
+
+

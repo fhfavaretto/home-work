@@ -1,0 +1,29 @@
+Cod. Registro  1  1   "A"                                                         
+Cod. Remessa   2  2   1                                                           
+Cod. Convenio  3  22  "000000              "                                      
+Nome Empresa   23 42  Subs(SM0->M0_NOMECOM,1,20)                                  
+Cod. Banco     43 45  104                                                         
+Nome Banco     46 65  "CAIXA ECONOM.FEDERAL"                                      
+Data Gera. Arq.66 73  GravaData(DDATABASE,.F.,8)                                  
+Num. Seq. Arq. 74 79  "      "                                                    
+Versao Lay Out 80 81  04                                                          
+Ident. Servico 82 98  "FOLHA PAGAMENTO"                                           
+Reservado      99 150 SPACE(52)                                                   
+Cod. Registro  1  1   "E"                                                         
+Ind.Cliente/Emp2  26  Subs(SRA->RA_NOME,1,25)                                     
+Agencia Credito27 30  Subs(SRA->RA_BCDEPSA,4,7)                                   
+Ind. Cliente1  31 33  001                                                         
+Ind.Cliente2   34 41  Subs(SRA->RA_CTDEPSA,1,8)                                   
+Ind. Cliente3  42 42  Subs(SRA->RA_CTDEPSA,9,9)                                   
+Ind. Cliente4  43 44  SPACE(2)                                                    
+Data Vencimento45 52  GravaData(DDATAPGTO,.F.,8)                                  
+Valor Credito  53 67  NVALOR                                                      
+Codigo Moeda   68 69  03                                                          
+Uso Empresa    70 129 SPACE(60)                                                   
+Reservado      130149 SPACE(20)                                                   
+Codigo Moviment150150 2                                                           
+Codigo Registro1  1   "Z"                                                         
+Total Registro 2  7   NTOTFUNC+2                                                  
+Conter "0"s    8  24  00000000000000000                                           
+Valor Tot. Cred25 41  NTOTAL                                                      
+Reservado      42 150 SPACE(109)                                                  

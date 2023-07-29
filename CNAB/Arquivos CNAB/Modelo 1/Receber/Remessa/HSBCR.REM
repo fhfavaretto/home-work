@@ -1,0 +1,38 @@
+COD.REGISTRO   0010010"0"                                                         
+COD.ARQUIVO    0020020"1"                                                         
+LITERAL ARQUIVO0030090"REMESSA"                                                   
+COD.SERVICO    0100110"01"                                                        
+LITERAL SERVICO0120260"COBRANCA"                                                  
+ZERO           0270270"0"                                                         
+AGENCIA CEDENTE0280310PADL(ALLTRIM(SEE->EE_AGENCIA),4,"0")                        
+SUB-CONTA      0320330"55"                                                        
+CONTA CORRENTE 0340440SEE->EE_AGENCIA+SEE->EE_CONTA                               
+BANCO          0450460""                                                          
+NOME DO CLIENTE0470760SUBSTR(SM0->M0_NOME,1,30)                                   
+COD.BANCO      0770790"399"                                                       
+NOME DO BANCO  0800940"HSBC"                                                      
+DATA GRAVACAO  0951000GRAVADATA(DDATABASE,.F.)                                    
+DENSIDADE      1011050"01600"                                                     
+LITERAL DENSIDA1061080"BPI"                                                       
+USO BANCO      1091100""                                                          
+SIGLA LAY-OUT  1111170"LANCV08"                                                   
+USO DO BANCO   1183940""                                                          
+NUM.SEQUENCIAL 3954000"000001"                                                    
+COD.REGISTRO   0010010"1"                                                         
+COD.DE INSCRICA0020030IIF(LEN(ALLTRIM(SA1->A1_CGC)) > 14,"02","01")               
+NUM.INSCRICAO  0040170STRZERO(VAL(SA1->A1_CGC),14)                                
+ZERO           0180180"0"                                                         
+AGENCIA CEDENTE0190220PADL(ALLTRIM(SEE->EE_AGENCIA),4,"0")                        
+SUB-CONTA      0230240"55"                                                        
+CONTA CORENTE  0250350SEE->EE_AGENCIA+SEE->EE_CONTA                               
+BRANCOS        0360370""                                                          
+CONTROLE PARTI.0380620SE1->E1_PREFIXO+SE1->E1_NUM+SE1->E1_PARCELA+SE1->E1_TIPO    
+NOSSO NUMERO   0630730"0000000000"                                                
+DESCONTO DATA 20740790"000000"                                                    
+VLR.DESCONTO 2 0800902"00000000000"                                               
+DESCONTO DATA 30910960"000000"                                                    
+VLR.DESCONTO 3 0971072"00000000000"                                               
+CARTEIRA       1081080"1"                                                         
+COD.OCORRENCIA 1091100IIF(EMPTY(SE1->E1_OCORREN),'01',SUBSTR(SE1->E1_OCORREN,1,2))
+SEU NUMERO     1111200SE1->E1_PREFIXO+SE1->E1_NUM+SE1->E1_PARCELA
+VENCIMENTO    

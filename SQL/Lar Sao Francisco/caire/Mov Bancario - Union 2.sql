@@ -1,0 +1,541 @@
+SELECT 
+  E5.E5_FILIAL FILIAL,
+  /*=======================================================================================*//*=======================================================================================*/
+  E5.E5_PREFIXO PREFIXO,
+  /*=======================================================================================*//*=======================================================================================*/
+  E5.E5_NUMERO TITULO,
+  /*=======================================================================================*//*=======================================================================================*/
+  E5.E5_NUMCHEQ NUM_CHEQUE,
+  /*=======================================================================================*//*=======================================================================================*/
+  E5.E5_PARCELA PARCELA, 
+  /*=======================================================================================*//*=======================================================================================*/
+  E5.E5_TIPO TIPO_TITULO,
+  /*=======================================================================================*//*=======================================================================================*/
+ 
+ CASE WHEN E2.E2_TIPO = 'TX' THEN
+ 
+ (SELECT E2_CCD FROM SE2010 WHERE 
+ 
+    E2_FILIAL = E5.E5_FILIAL
+    AND E2_NUM = E5.E5_NUMERO
+    AND E2_PREFIXO = E5.E5_PREFIXO
+    AND E2_TIPO = E5.E5_TIPO
+    AND E5.E5_RECPAG = 'P'
+    AND D_E_L_E_T_=' ' AND ROWNUM = 1 ) ELSE 
+   CASE WHEN (E5.E5_CCC IS NULL OR E5.E5_CCC = ' ') AND E5.E5_RECPAG = 'R' THEN CASE WHEN EV.EV_RATEICC = '1' THEN EZ.EZ_CCUSTO ELSE E1.E1_CCC END
+         WHEN (E5.E5_CCC IS NOT NULL OR E5.E5_CCC != ' ') AND E5.E5_RECPAG = 'R' THEN E5.E5_CCC
+         WHEN E5.E5_RECPAG = 'P' THEN 
+            CASE WHEN D1.D1_RATEIO = '1' THEN DE.DE_CC ELSE
+                CASE WHEN D1.D1_CC IS NULL OR D1.D1_CC = ' ' THEN CASE WHEN EV.EV_RATEICC = '1' THEN EZ.EZ_CCUSTO ELSE E2.E2_CCD END ELSE D1.D1_CC END
+            END          
+    ELSE E2.E2_CCD END END COD_CC,
+/*=======================================================================================*//*=======================================================================================*/    
+       
+(SELECT CTT_DESC01 FROM CTT010 WHERE CTT_CUSTO = 
+CASE WHEN E2.E2_TIPO = 'TX' THEN
+ 
+ (SELECT SUBSTR(E2.E2_CCD,1,5)||'       ' FROM SE2010 WHERE 
+ 
+    E2_FILIAL = E5.E5_FILIAL
+    AND E2_NUM = E5.E5_NUMERO
+    AND E2_PREFIXO = E5.E5_PREFIXO
+    AND E2_TIPO = E5.E5_TIPO
+    AND E5.E5_RECPAG = 'P'
+    AND D_E_L_E_T_=' ' AND ROWNUM = 1 ) ELSE
+    CASE WHEN (E5.E5_CCC IS NULL OR E5.E5_CCC = ' ') AND E5.E5_RECPAG = 'R' THEN CASE WHEN EV.EV_RATEICC = '1' THEN SUBSTR(EZ.EZ_CCUSTO,1,5)||'       ' ELSE SUBSTR(E1.E1_CCC,1,5)||'       ' END 
+         WHEN (E5.E5_CCC IS NOT NULL OR E5.E5_CCC != ' ') AND E5.E5_RECPAG = 'R' THEN E5.E5_CCC
+         WHEN E5.E5_RECPAG = 'P' THEN 
+            CASE WHEN D1.D1_RATEIO = '1' THEN SUBSTR(DE.DE_CC,1,5)||'       ' ELSE
+                CASE WHEN D1.D1_CC IS NULL OR D1.D1_CC = ' ' THEN CASE WHEN EV.EV_RATEICC = '1' THEN SUBSTR(EZ.EZ_CCUSTO,1,5)||'       ' ELSE SUBSTR(E2.E2_CCD,1,5)||'       ' END  ELSE SUBSTR(D1.D1_CC,1,5)||'       ' END
+         END             
+    ELSE E2.E2_CCD END END
+  AND CTT010.D_E_L_E_T_=' ' )  LOCAL_CC,
+ 
+ /*=======================================================================================*//*=======================================================================================*/
+  
+   
+  (SELECT CTT_DESC01 FROM CTT010 WHERE CTT_CUSTO =
+  CASE WHEN E2.E2_TIPO = 'TX' THEN
+ 
+(SELECT SUBSTR(E2.E2_CCD,1,8)||'    ' FROM SE2010 WHERE 
+ 
+    E2_FILIAL = E5.E5_FILIAL
+    AND E2_NUM = E5.E5_NUMERO
+    AND E2_PREFIXO = E5.E5_PREFIXO
+    AND E2_TIPO = E5.E5_TIPO
+    AND E5.E5_RECPAG = 'P'
+    AND D_E_L_E_T_=' ' AND ROWNUM = 1) ELSE
+    CASE WHEN (E5.E5_CCC IS NULL OR E5.E5_CCC = ' ') AND E5.E5_RECPAG = 'R' THEN CASE WHEN EV.EV_RATEICC = '1' THEN SUBSTR(EZ.EZ_CCUSTO,1,8)||'    ' ELSE SUBSTR(E1.E1_CCC,1,8)||'    ' END 
+         WHEN (E5.E5_CCC IS NOT NULL OR E5.E5_CCC != ' ') AND E5.E5_RECPAG = 'R' THEN E5.E5_CCC
+         WHEN E5.E5_RECPAG = 'P' THEN 
+            CASE WHEN D1.D1_RATEIO = '1' THEN SUBSTR(DE.DE_CC,1,8)||'    ' ELSE
+                CASE WHEN D1.D1_CC IS NULL OR D1.D1_CC = ' ' THEN CASE WHEN EV.EV_RATEICC = '1' THEN SUBSTR(EZ.EZ_CCUSTO,1,8)||'    ' ELSE SUBSTR(E2.E2_CCD,1,8)||'    ' END ELSE SUBSTR(D1.D1_CC,1,8)||'    ' END
+            END          
+    ELSE E2.E2_CCD END END
+  AND CTT010.D_E_L_E_T_=' ') DEPTO_CC,
+
+/*=======================================================================================*//*=======================================================================================*/
+
+   
+(SELECT CTT_DESC01 FROM CTT010 WHERE CTT_CUSTO =
+CASE WHEN E2.E2_TIPO = 'TX' THEN
+ 
+ (SELECT E2_CCD FROM SE2010 WHERE 
+ 
+    E2_FILIAL = E5.E5_FILIAL
+    AND E2_NUM = E5.E5_NUMERO
+    AND E2_PREFIXO = E5.E5_PREFIXO
+    AND E2_TIPO = E5.E5_TIPO
+    AND E5.E5_RECPAG = 'P'
+    AND D_E_L_E_T_=' ' AND ROWNUM = 1 ) ELSE 
+   CASE WHEN (E5.E5_CCC IS NULL OR E5.E5_CCC = ' ') AND E5.E5_RECPAG = 'R' THEN CASE WHEN EV.EV_RATEICC = '1' THEN EZ.EZ_CCUSTO ELSE E1.E1_CCC END
+         WHEN (E5.E5_CCC IS NOT NULL OR E5.E5_CCC != ' ') AND E5.E5_RECPAG = 'R' THEN E5.E5_CCC
+         WHEN E5.E5_RECPAG = 'P' THEN 
+            CASE WHEN D1.D1_RATEIO = '1' THEN DE.DE_CC ELSE
+                CASE WHEN D1.D1_CC IS NULL OR D1.D1_CC = ' ' THEN CASE WHEN EV.EV_RATEICC = '1' THEN EZ.EZ_CCUSTO ELSE E2.E2_CCD END ELSE D1.D1_CC END
+            END          
+    ELSE E2.E2_CCD END END
+AND CTT010.D_E_L_E_T_=' ') CENTRO_CUSTO,
+
+
+/*=======================================================================================*//*=======================================================================================*/
+  
+   E5.E5_ORIGEM ORIGEM ,
+/*=======================================================================================*//*=======================================================================================*/
+
+  (SELECT ED_DESCRIC FROM SED010 WHERE ED_CODIGO = 
+  CASE WHEN EV.EV_NATUREZ IS NULL THEN CASE WHEN E5.E5_NATUREZ IS NULL AND E5.E5_RECPAG = 'R' THEN E1.E1_NATUREZ
+      WHEN E5.E5_NATUREZ IS NULL AND E5.E5_RECPAG = 'P' THEN E2.E2_NATUREZ
+      ELSE E5.E5_NATUREZ END ELSE EV.EV_NATUREZ END AND D_E_L_E_T_=' ') NATUREZA,
+/*=======================================================================================*/ /*=======================================================================================*/ 
+      E5_NATUREZ,
+/*=======================================================================================*/  /*=======================================================================================*/
+  CASE WHEN E5.E5_RECPAG = 'P' THEN 'PAGAR' WHEN E5.E5_RECPAG = 'R' THEN 'RECEBER' ELSE ' ' END MOVIMENTO,
+/*=======================================================================================*/ /*=======================================================================================*/
+  CASE WHEN E5.E5_RECONC != ' ' THEN 'SIM' 
+    ELSE 
+      CASE WHEN E5.E5_LOTE = ' ' THEN 'NÃO' 
+      ELSE 'SIM'       
+    END
+  END CONCILIADO,
+/*=======================================================================================*/  /*=======================================================================================*/
+  E5.E5_BENEF BENEFICIARIO,
+/*=======================================================================================*/ /*=======================================================================================*/
+
+    ROUND((CASE WHEN D1.D1_RATEIO = '1' THEN DE.DE_CUSTO1 ELSE
+      CASE WHEN D1.D1_CUSTO IS NULL THEN E5.E5_VALOR ELSE D1.D1_CUSTO END
+  END 
+  * CASE WHEN EV.EV_PERC = 1 THEN 1 WHEN (EV.EV_PERC) IS NULL THEN 1 ELSE (EV.EV_PERC) END
+  * CASE WHEN EZ.EZ_PERC < 1 THEN EZ.EZ_PERC ELSE 1 END
+  / CASE WHEN EZ.EZ_PERC IS NULL THEN 1 ELSE (SELECT COUNT(EV_NUM) FROM SEV010 WHERE EZ.EZ_NUM = EV_NUM
+  AND EZ.EZ_FILIAL = EV_FILIAL AND EZ.EZ_PREFIXO = EV_PREFIXO
+  AND EZ.EZ_CLIFOR = EV_CLIFOR AND EZ.EZ_LOJA = EV_LOJA
+  AND D_E_L_E_T_=' ' AND EZ.EZ_PARCELA = EV_PARCELA
+  GROUP BY EV_NUM) END
+  / CASE WHEN (SELECT COUNT(E5_MOTBX) FROM SE5010 WHERE E5_NUMERO = E2.E2_NUM
+  AND E5_FILIAL = E2.E2_FILIAL AND E5_PREFIXO = E2.E2_PREFIXO AND E5_CLIFOR = E2.E2_FORNECE 
+  AND E5_LOJA = E2.E2_LOJA AND SE5010.D_E_L_E_T_=' ' AND E2_VALOR = E5.E5_VALOR GROUP BY E5_NUMERO) IS NULL THEN 1 ELSE 
+  (SELECT COUNT(E5_MOTBX) FROM SE5010 WHERE E5_NUMERO = E2.E2_NUM
+  AND E5_FILIAL = E2.E2_FILIAL AND E5_PREFIXO = E2.E2_PREFIXO AND E5_CLIFOR = E2.E2_FORNECE
+  AND E5_LOJA = E2.E2_LOJA AND SE5010.D_E_L_E_T_=' ' AND E2_VALOR = E5.E5_VALOR GROUP BY E5_NUMERO)
+  
+  END),4)*(CASE WHEN E5.E5_RECPAG ='P' THEN -1 ELSE 1 END) CUSTO,
+
+/*=======================================================================================*/  /*=======================================================================================*/
+  'TOTAL' SALDO,
+/*=======================================================================================*/  /*=======================================================================================*/ 
+  'SE5' TABELA,
+/*=======================================================================================*/  /*=======================================================================================*/
+  E5.E5_AGENCIA AGENCIA,
+/*=======================================================================================*/  /*=======================================================================================*/
+  E5.E5_BANCO BANCO,
+/*=======================================================================================*/  /*=======================================================================================*/
+  E5.E5_CONTA CONTA,
+/*=======================================================================================*/  /*=======================================================================================*/
+  E5.E5_TIPODOC TIPO_DOC,
+/*=======================================================================================*/ /*=======================================================================================*/
+
+  SUBSTR(CASE WHEN E5_RECPAG = 'P' THEN CASE WHEN E2.E2_EMISSAO IS NULL THEN E5.E5_DTDISPO ELSE E2.E2_EMISSAO END WHEN E5_RECPAG = 'R' THEN CASE WHEN E1.E1_BAIXA IS NULL THEN E5.E5_DTDISPO ELSE E1.E1_BAIXA END ELSE E5.E5_DTDISPO END,7,2) DIA_EMISSAO,
+  SUBSTR(CASE WHEN E5_RECPAG = 'P' THEN CASE WHEN E2.E2_EMISSAO IS NULL THEN E5.E5_DTDISPO ELSE E2.E2_EMISSAO END WHEN E5_RECPAG = 'R' THEN CASE WHEN E1.E1_BAIXA IS NULL THEN E5.E5_DTDISPO ELSE E1.E1_BAIXA END ELSE E5.E5_DTDISPO END,5,2) MES_EMISSAO,
+  SUBSTR(CASE WHEN E5_RECPAG = 'P' THEN CASE WHEN E2.E2_EMISSAO IS NULL THEN E5.E5_DTDISPO ELSE E2.E2_EMISSAO END WHEN E5_RECPAG = 'R' THEN CASE WHEN E1.E1_BAIXA IS NULL THEN E5.E5_DTDISPO ELSE E1.E1_BAIXA END ELSE E5.E5_DTDISPO END,1,4) ANO_EMISSAO,
+/*=======================================================================================*//*=======================================================================================*/
+  SUBSTR(CASE WHEN E5_RECPAG = 'P' THEN CASE WHEN E2.E2_EMISSAO IS NULL THEN E5.E5_DTDISPO ELSE E2.E2_EMISSAO END WHEN E5_RECPAG = 'R' THEN CASE WHEN E1.E1_BAIXA IS NULL THEN E5.E5_DTDISPO ELSE E1.E1_BAIXA END ELSE E5.E5_DTDISPO END,7,2)||'/'||
+  SUBSTR(CASE WHEN E5_RECPAG = 'P' THEN CASE WHEN E2.E2_EMISSAO IS NULL THEN E5.E5_DTDISPO ELSE E2.E2_EMISSAO END WHEN E5_RECPAG = 'R' THEN CASE WHEN E1.E1_BAIXA IS NULL THEN E5.E5_DTDISPO ELSE E1.E1_BAIXA END ELSE E5.E5_DTDISPO END,5,2)||'/'||
+  SUBSTR(CASE WHEN E5_RECPAG = 'P' THEN CASE WHEN E2.E2_EMISSAO IS NULL THEN E5.E5_DTDISPO ELSE E2.E2_EMISSAO END WHEN E5_RECPAG = 'R' THEN CASE WHEN E1.E1_BAIXA IS NULL THEN E5.E5_DTDISPO ELSE E1.E1_BAIXA END ELSE E5.E5_DTDISPO END,1,4) EMISSAO,
+/*=======================================================================================*//*=======================================================================================*/
+  SUBSTR(CASE WHEN E5_RECPAG = 'P' THEN CASE WHEN E2.E2_VENCTO IS NULL THEN E5.E5_DTDISPO ELSE E2.E2_VENCTO END WHEN E5_RECPAG = 'R' THEN CASE WHEN E1.E1_VENCTO IS NULL THEN E5.E5_DTDISPO ELSE E1.E1_VENCTO END ELSE E5.E5_DTDISPO END,7,2) DIA_VENCIMENTO,
+  SUBSTR(CASE WHEN E5_RECPAG = 'P' THEN CASE WHEN E2.E2_VENCTO IS NULL THEN E5.E5_DTDISPO ELSE E2.E2_VENCTO END WHEN E5_RECPAG = 'R' THEN CASE WHEN E1.E1_VENCTO IS NULL THEN E5.E5_DTDISPO ELSE E1.E1_VENCTO END ELSE E5.E5_DTDISPO END,5,2) MES_VENCIMENTO,
+  SUBSTR(CASE WHEN E5_RECPAG = 'P' THEN CASE WHEN E2.E2_VENCTO IS NULL THEN E5.E5_DTDISPO ELSE E2.E2_VENCTO END WHEN E5_RECPAG = 'R' THEN CASE WHEN E1.E1_VENCTO IS NULL THEN E5.E5_DTDISPO ELSE E1.E1_VENCTO END ELSE E5.E5_DTDISPO END,1,4) ANO_VENCIMENTO,
+/*=======================================================================================*//*=======================================================================================*/  	
+  SUBSTR(CASE WHEN E5_RECPAG = 'P' THEN CASE WHEN E2.E2_VENCTO IS NULL THEN E5.E5_DTDISPO ELSE E2.E2_VENCTO END WHEN E5_RECPAG = 'R' THEN CASE WHEN E1.E1_VENCTO IS NULL THEN E5.E5_DTDISPO ELSE E1.E1_VENCTO END ELSE E5.E5_DTDISPO END,7,2)||'/'||
+  SUBSTR(CASE WHEN E5_RECPAG = 'P' THEN CASE WHEN E2.E2_VENCTO IS NULL THEN E5.E5_DTDISPO ELSE E2.E2_VENCTO END WHEN E5_RECPAG = 'R' THEN CASE WHEN E1.E1_VENCTO IS NULL THEN E5.E5_DTDISPO ELSE E1.E1_VENCTO END ELSE E5.E5_DTDISPO END,5,2)||'/'||
+  SUBSTR(CASE WHEN E5_RECPAG = 'P' THEN CASE WHEN E2.E2_VENCTO IS NULL THEN E5.E5_DTDISPO ELSE E2.E2_VENCTO END WHEN E5_RECPAG = 'R' THEN CASE WHEN E1.E1_VENCTO IS NULL THEN E5.E5_DTDISPO ELSE E1.E1_VENCTO END ELSE E5.E5_DTDISPO END,1,4) VENCIMENTO,
+
+/*=======================================================================================*//*=======================================================================================*/
+  SUBSTR(E5.E5_DTDISPO,7,2)||'/'||SUBSTR(E5.E5_DTDISPO,5,2)||'/'||SUBSTR(E5.E5_DTDISPO,1,4) BAIXA,
+  SUBSTR(E5.E5_DTDISPO,7,2) DIA_BAIXA,
+  SUBSTR(E5.E5_DTDISPO,5,2) MES_BAIXA,
+  SUBSTR(E5.E5_DTDISPO,1,4) ANO_BAIXA,
+/*=======================================================================================*//*=======================================================================================*/
+  E5.E5_HISTOR HISTORICO
+
+FROM SE5010 E5 
+    
+  FULL OUTER JOIN SE2010 E2 
+   ON 
+    E2.E2_FILIAL = E5.E5_FILIAL
+    AND E2.E2_NUM = E5.E5_NUMERO AND E2.E2_PARCELA = E5.E5_PARCELA 
+    AND E2.E2_PREFIXO = E5.E5_PREFIXO AND E2.E2_TIPO = E5.E5_TIPO AND E5.E5_RECPAG = 'P'
+    AND E2.E2_FORNECE = E5.E5_FORNECE AND E2.E2_LOJA = E5.E5_LOJA 
+    AND E2.D_E_L_E_T_=' ' 
+  
+    FULL OUTER JOIN SD1010 D1 
+    ON D1.D1_DOC = E2.E2_NUM
+    AND D1.D1_SERIE = E2.E2_PREFIXO
+    AND D1.D1_FORNECE = E2.E2_FORNECE
+    AND E2.E2_LOJA = D1.D1_LOJA
+    AND E2.E2_FILIAL = D1.D1_FILIAL
+    AND D1.D_E_L_E_T_=' '
+       
+    FULL OUTER JOIN SDE010 DE ON DE.DE_DOC = E2.E2_NUM
+    AND DE.DE_SERIE = E2.E2_PREFIXO
+    AND DE.DE_FORNECE = E2.E2_FORNECE
+    AND E2.E2_LOJA = DE.DE_LOJA
+    AND E2.E2_FILIAL = DE.DE_FILIAL
+    AND D1.D1_RATEIO = '1'
+    AND D1.D1_ITEM = DE.DE_ITEMNF
+    AND DE.D_E_L_E_T_=' ' 
+      
+  FULL OUTER JOIN SE1010 E1 ON E1.E1_FILIAL = E5.E5_FILIAL
+    AND E1.E1_NUM = E5.E5_NUMERO AND E1.E1_PARCELA = E5.E5_PARCELA AND E1.E1_PREFIXO = E5.E5_PREFIXO AND E1.E1_TIPO = E5.E5_TIPO AND E5.E5_RECPAG = 'R'
+    AND E1.E1_CLIENTE = E5.E5_CLIENTE AND E1.E1_LOJA = E5.E5_LOJA AND E1.D_E_L_E_T_=' '
+    
+  FULL OUTER JOIN SEV010 EV 
+  ON EV.EV_NUM IN (E5.E5_NUMERO,E2.E2_NUM,E1.E1_NUM)
+    AND EV.EV_PREFIXO IN (E5.E5_PREFIXO,E2.E2_PREFIXO,E1.E1_PREFIXO)
+    AND EV.EV_CLIFOR IN (E5.E5_FORNECE,E2.E2_FORNECE,E1.E1_CLIENTE)
+    AND EV.EV_PARCELA IN (E5.E5_PARCELA,E2.E2_PARCELA,E1.E1_PARCELA)
+    AND EV.EV_LOJA IN (E5.E5_LOJA,E2.E2_LOJA,E1.E1_LOJA)
+    AND EV.EV_FILIAL IN (E5.E5_FILIAL,E2.E2_FILIAL,E1.E1_FILIAL)
+    AND EV.D_E_L_E_T_=' '
+        
+  LEFT OUTER JOIN SEZ010 EZ 
+  ON EZ.EZ_NUM = EV.EV_NUM
+    AND EV.EV_PREFIXO = EZ.EZ_PREFIXO
+    AND EV.EV_CLIFOR = EZ.EZ_CLIFOR
+    AND EV.EV_PARCELA = EZ.EZ_PARCELA
+    AND EV.EV_LOJA = EZ.EZ_LOJA
+    AND EV.EV_FILIAL = EZ.EZ_FILIAL
+    /*AND EV.EV_RATEICC = '1'
+    AND EZ.EZ_PERC < 1*/
+    AND EZ.D_E_L_E_T_=' ' 
+
+WHERE E5.D_E_L_E_T_=' ' AND E5.E5_PARCELA NOT IN ('00','0') 
+/*AND (E1.E1_BAIXA IS NULL OR E1.E1_BAIXA BETWEEN :DATA_INICIO AND :DATA_FINAL)
+AND (E2.E2_EMISSAO IS NULL OR E2.E2_EMISSAO BETWEEN :DATA_INICIO AND :DATA_FINAL)*/
+AND E5.E5_DTDISPO BETWEEN :DATA_INICIO AND :DATA_FINAL
+AND E5.E5_SITUACA != 'C'
+AND E5.E5_TIPODOC NOT IN('ES','EC')
+AND E5.E5_HISTOR NOT LIKE '%Baixa Automatica%'
+AND E5.E5_HISTOR NOT LIKE '%Bx.Emis.%'
+AND E5_HISTOR NOT LIKE '%Cancelamento%'
+/*
+AND 
+(E5.E5_FILIAL NOT IN 
+(SELECT B.E5_FILIAL FROM SE5010 B
+WHERE B.E5_FILIAL = E5.E5_FILIAL and B.E5_BANCO = E5.E5_BANCO
+AND B.E5_AGENCIA = E5.E5_AGENCIA AND B.E5_CONTA = E5.E5_CONTA AND B.E5_RECPAG != E5.E5_RECPAG 
+AND E5.E5_NATUREZ = B.E5_NATUREZ AND B.E5_LOTE = E5.E5_LOTE AND B.E5_SEQ != E5.E5_SEQ
+AND B.E5_TIPO = E5.E5_TIPO AND B.E5_PARCELA = E5.E5_PARCELA AND B.D_E_L_E_T_=' ') )
+*/
+UNION ALL
+
+SELECT 
+  E2.E2_FILIAL FILIAL,
+  E2.E2_PREFIXO PREFIXO,
+  E2.E2_NUM TITULO,
+  ' ',
+  E2.E2_PARCELA PARCELA, 
+  E2.E2_TIPO TIPO_TITULO,
+  
+ /*=======================================================================================*//*=======================================================================================*/
+ CASE WHEN E2.E2_TIPO = 'TX' THEN (SELECT CASE WHEN D1_RATEIO = '1' THEN DE_CC ELSE D1_CC END FROM SD1010
+ LEFT OUTER JOIN SDE010 ON DE_FILIAL = D1_FILIAL 
+ AND D1_DOC = DE_DOC 
+ AND D1_FORNECE = DE_FORNECE 
+ AND D1_LOJA = DE_LOJA
+ AND D1_RATEIO = '1'
+ AND D1_ITEM = DE_ITEMNF
+ AND SDE010.D_E_L_E_T_=' ' 
+ AND SD1010.D_E_L_E_T_=' ' 
+    
+ WHERE D1_DOC = E2.E2_NUM AND D1_FILIAL = E2.E2_FILIAL AND E2.E2_PREFIXO = D1_SERIE AND ROWNUM = 1) ELSE
+ 
+ CASE WHEN D1.D1_RATEIO = '1' THEN DE.DE_CC ELSE
+    CASE WHEN D1.D1_CC IS NULL OR D1.D1_CC = ' ' THEN E2.E2_CCD ELSE D1.D1_CC END END END COD_CC,
+/*=======================================================================================*//*=======================================================================================*/              
+(SELECT CTT_DESC01 FROM CTT010 WHERE CTT_CUSTO =
+    CASE WHEN E2.E2_TIPO = 'TX' THEN (SELECT CASE WHEN D1_RATEIO = '1' THEN SUBSTR(DE_CC,1,5)||'       ' ELSE SUBSTR(D1_CC,1,5)||'       ' END FROM SD1010
+    LEFT OUTER JOIN SDE010 ON DE_FILIAL = D1_FILIAL 
+     AND D1_DOC = DE_DOC 
+     AND D1_FORNECE = DE_FORNECE 
+     AND D1_LOJA = DE_LOJA
+     AND D1_RATEIO = '1'
+     AND D1_ITEM = DE_ITEMNF
+     AND SDE010.D_E_L_E_T_=' ' 
+     AND SD1010.D_E_L_E_T_=' ' 
+    
+ WHERE D1_DOC = E2.E2_NUM AND D1_FILIAL = E2.E2_FILIAL AND E2.E2_PREFIXO = D1_SERIE AND ROWNUM = 1) ELSE
+ 
+ CASE WHEN D1.D1_RATEIO = '1' THEN SUBSTR(DE_CC,1,5)||'       ' ELSE
+    CASE WHEN D1.D1_CC IS NULL OR D1.D1_CC = ' ' THEN SUBSTR(E2.E2_CCD,1,5)||'       ' ELSE SUBSTR(D1.D1_CC,1,5)||'       ' END END END AND CTT010.D_E_L_E_T_=' ') LOCAL_CC,
+ 
+/*=======================================================================================*//*=======================================================================================*/      
+(SELECT CTT_DESC01 FROM CTT010 WHERE CTT_CUSTO =
+    CASE WHEN E2.E2_TIPO = 'TX' THEN (SELECT CASE WHEN D1_RATEIO = '1' THEN SUBSTR(DE_CC,1,8)||'    ' ELSE SUBSTR(D1_CC,1,8)||'    ' END FROM SD1010
+    LEFT OUTER JOIN SDE010 ON DE_FILIAL = D1_FILIAL 
+     AND D1_DOC = DE_DOC 
+     AND D1_FORNECE = DE_FORNECE 
+     AND D1_LOJA = DE_LOJA
+     AND D1_RATEIO = '1'
+     AND D1_ITEM = DE_ITEMNF
+     AND SDE010.D_E_L_E_T_=' ' 
+     AND SD1010.D_E_L_E_T_=' ' 
+    
+ WHERE D1_DOC = E2.E2_NUM AND D1_FILIAL = E2.E2_FILIAL AND E2.E2_PREFIXO = D1_SERIE AND ROWNUM = 1) ELSE
+ 
+ CASE WHEN D1.D1_RATEIO = '1' THEN SUBSTR(DE_CC,1,8)||'    ' ELSE
+    CASE WHEN D1.D1_CC IS NULL OR D1.D1_CC = ' ' THEN SUBSTR(E2.E2_CCD,1,8)||'    ' ELSE SUBSTR(D1.D1_CC,1,8)||'    ' END END END AND CTT010.D_E_L_E_T_=' ') DEPTO_CC,
+/*=======================================================================================*//*=======================================================================================*/   
+(SELECT CTT_DESC01 FROM CTT010 WHERE CTT_CUSTO =
+    CASE WHEN E2.E2_TIPO = 'TX' THEN (SELECT CASE WHEN D1_RATEIO = '1' THEN DE_CC ELSE D1_CC END FROM SD1010
+    LEFT OUTER JOIN SDE010 ON DE_FILIAL = D1_FILIAL 
+     AND D1_DOC = DE_DOC 
+     AND D1_FORNECE = DE_FORNECE 
+     AND D1_LOJA = DE_LOJA
+     AND D1_RATEIO = '1'
+     AND D1_ITEM = DE_ITEMNF
+     AND SDE010.D_E_L_E_T_=' ' 
+     AND SD1010.D_E_L_E_T_=' ' 
+    
+ WHERE D1_DOC = E2.E2_NUM AND D1_FILIAL = E2.E2_FILIAL AND E2.E2_PREFIXO = D1_SERIE AND ROWNUM = 1) ELSE
+ 
+ CASE WHEN D1.D1_RATEIO = '1' THEN DE.DE_CC ELSE
+    CASE WHEN D1.D1_CC IS NULL OR D1.D1_CC = ' ' THEN E2.E2_CCD ELSE D1.D1_CC END END END AND CTT010.D_E_L_E_T_=' ') CENTRO_CUSTO,
+ /*=======================================================================================*//*=======================================================================================*/   
+   E2.E2_ORIGEM ORIGEM ,
+   
+  (SELECT ED_DESCRIC FROM SED010 WHERE ED_CODIGO = 
+  CASE WHEN EV.EV_NATUREZ IS NULL THEN E2.E2_NATUREZ ELSE EV.EV_NATUREZ END AND D_E_L_E_T_=' ') NATUREZA,
+  
+      E2_NATUREZ,
+  
+  'PAGAR' MOVIMENTO,
+  'EM ABERTO' CONCILIADO,
+  E2.E2_NOMFOR FORNECEDOR,
+ /*=======================================================================================*//*=======================================================================================*/ 
+  ROUND((CASE WHEN D1.D1_RATEIO = '1' THEN DE.DE_CUSTO1 ELSE
+      CASE WHEN D1.D1_CUSTO IS NULL THEN E2.E2_VALOR ELSE D1.D1_CUSTO END
+      * CASE WHEN EZ.EZ_PERC < 1 THEN EZ.EZ_PERC ELSE 1 END
+  / CASE WHEN EZ.EZ_PERC IS NULL THEN 1 ELSE (SELECT COUNT(EV_NUM) FROM SEV010 WHERE EZ.EZ_NUM = EV_NUM
+  AND EZ.EZ_FILIAL = EV_FILIAL AND EZ.EZ_PREFIXO = EV_PREFIXO
+  AND EZ.EZ_CLIFOR = EV_CLIFOR AND EZ.EZ_LOJA = EV_LOJA
+  AND D_E_L_E_T_=' ' AND EZ.EZ_PARCELA = EV_PARCELA
+  GROUP BY EV_NUM) END
+      / CASE WHEN (SELECT COUNT(E2_PARCELA) FROM SE2010 WHERE E2_NUM = E2.E2_NUM
+  AND E2_FILIAL = E2.E2_FILIAL AND E2_PREFIXO = E2.E2_PREFIXO AND E2_FORNECE = E2.E2_FORNECE AND E2_LOJA = E2.E2_LOJA AND SE2010.D_E_L_E_T_=' ' AND E2_TIPO != 'TX' 
+  AND (SELECT E2_NUM FROM SE2010 WHERE E2_NUM = E2.E2_NUM
+  AND E2_FILIAL = E2.E2_FILIAL AND E2_PREFIXO = E2.E2_PREFIXO AND E2_FORNECE = E2.E2_FORNECE AND E2_LOJA = E2.E2_LOJA AND SE2010.D_E_L_E_T_=' ' AND E2_TIPO != 'TX' AND E2_DESDOBR = 'S' AND ROWNUM = 1) IS NULL
+  GROUP BY E2_NUM) IS NULL THEN 1 ELSE 
+  (SELECT COUNT(E2_PARCELA) FROM SE2010 WHERE E2_NUM = E2.E2_NUM
+  AND E2_FILIAL = E2.E2_FILIAL AND E2_PREFIXO = E2.E2_PREFIXO AND E2_FORNECE = E2.E2_FORNECE AND E2_LOJA = E2.E2_LOJA AND SE2010.D_E_L_E_T_=' ' GROUP BY E2_NUM) END
+  END * CASE WHEN EV.EV_PERC = 1 THEN 1 WHEN (EV.EV_PERC) IS NULL THEN 1 ELSE (EV.EV_PERC) END),4) * -1 CUSTO,
+/*=======================================================================================*//*=======================================================================================*/
+  CASE WHEN E2.E2_SALDO > 0 AND E2.E2_SALDO < E2.E2_VALOR THEN 'PARCIAL' WHEN E2.E2_SALDO = 0 THEN 'TOTAL' ELSE 'EM ABERTO' END SALDO,
+   'SE2' TABELA, 
+  ' ' AGENCIA,
+  ' ' BANCO,
+  ' ' CONTA,
+  'SE2' TIPO_DOC,
+
+  SUBSTR(E2.E2_EMISSAO,7,2) DIA_EMISSAO,
+  SUBSTR(E2.E2_EMISSAO,5,2) MES_EMISSAO,
+  SUBSTR(E2.E2_EMISSAO,1,4) ANO_EMISSAO,
+
+  SUBSTR(E2.E2_EMISSAO,7,2)||'/'||
+  SUBSTR(E2.E2_EMISSAO,5,2)||'/'||
+  SUBSTR(E2.E2_EMISSAO,1,4) EMISSAO,
+
+  SUBSTR(E2.E2_VENCTO,7,2) DIA_VENCIMENTO,
+  SUBSTR(E2.E2_VENCTO,5,2) MES_VENCIMENTO,
+  SUBSTR(E2.E2_VENCTO,1,4) ANO_VENCIMENTO,
+  	
+  SUBSTR(E2.E2_VENCTO,7,2)||'/'||
+  SUBSTR(E2.E2_VENCTO,5,2)||'/'||
+  SUBSTR(E2.E2_VENCTO,1,4) VENCIMENTO,
+
+
+  SUBSTR(E2.E2_BAIXA,7,2)||'/'||SUBSTR(E2.E2_BAIXA,5,2)||'/'||SUBSTR(E2.E2_BAIXA,1,4) BAIXA,
+  SUBSTR(E2.E2_BAIXA,7,2) DIA_BAIXA,
+  SUBSTR(E2.E2_BAIXA,5,2) MES_BAIXA,
+  SUBSTR(E2.E2_BAIXA,1,4) ANO_BAIXA,
+
+  E2.E2_HIST HISTORICO
+
+FROM SE2010 E2 
+  
+    FULL OUTER JOIN SD1010 D1 
+    ON D1.D1_DOC = E2.E2_NUM
+    AND D1.D1_SERIE = E2.E2_PREFIXO
+    AND D1.D1_FORNECE = E2.E2_FORNECE
+    AND E2.E2_LOJA = D1.D1_LOJA
+    AND E2.E2_FILIAL = D1.D1_FILIAL
+    AND D1.D_E_L_E_T_=' '
+       
+    FULL OUTER JOIN SDE010 DE ON DE.DE_DOC = E2.E2_NUM
+    AND DE.DE_SERIE = E2.E2_PREFIXO
+    AND DE.DE_FORNECE = E2.E2_FORNECE
+    AND E2.E2_LOJA = DE.DE_LOJA
+    AND E2.E2_FILIAL = DE.DE_FILIAL
+    AND D1.D1_RATEIO = '1'
+    AND D1.D1_ITEM = DE.DE_ITEMNF
+    AND DE.D_E_L_E_T_=' ' 
+       
+ FULL OUTER JOIN SEV010 EV ON EV.EV_NUM = E2.E2_NUM
+    AND EV.EV_PREFIXO = E2.E2_PREFIXO
+    AND EV.EV_CLIFOR = E2.E2_FORNECE
+    AND EV.EV_PARCELA = E2.E2_PARCELA
+    AND E2.E2_LOJA = EV.EV_LOJA
+    AND E2.E2_FILIAL = EV.EV_FILIAL
+    AND EV.D_E_L_E_T_=' '
+    
+    LEFT OUTER JOIN SEZ010 EZ 
+    ON EZ.EZ_NUM = EV.EV_NUM
+    AND EV.EV_PREFIXO = EZ.EZ_PREFIXO
+    AND EV.EV_CLIFOR = EZ.EZ_CLIFOR
+    AND EV.EV_PARCELA = EZ.EZ_PARCELA
+    AND EV.EV_LOJA = EZ.EZ_LOJA
+    AND EV.EV_FILIAL = EZ.EZ_FILIAL
+    /*AND EV.EV_RATEICC = '1'
+    AND EZ.EZ_PERC < 1*/
+    AND EZ.D_E_L_E_T_=' ' 
+
+WHERE E2.D_E_L_E_T_=' ' AND E2.E2_PARCELA NOT IN('00','0')
+AND E2.E2_EMISSAO BETWEEN :DATA_INICIO AND :DATA_FINAL 
+AND E2.E2_SALDO > 0
+
+UNION ALL
+
+SELECT 
+  E1.E1_FILIAL FILIAL,
+  E1.E1_PREFIXO PREFIXO,
+  E1.E1_NUM TITULO,
+  ' ',
+  E1.E1_PARCELA PARCELA, 
+  E1.E1_TIPO TIPO_TITULO,
+  
+ 
+ CASE WHEN E1.E1_TIPO = 'TX' THEN (SELECT C6_CC FROM SC6010
+  WHERE C6_NOTA = E1.E1_NUM AND C6_FILIAL = E1.E1_FILIAL AND E1.E1_PREFIXO = C6_SERIE AND ROWNUM = 1) ELSE
+    CASE WHEN C6.C6_CC IS NULL OR C6.C6_CC = ' ' THEN E1.E1_CCC ELSE C6.C6_CC END END COD_CC,
+              
+(SELECT CTT_DESC01 FROM CTT010 WHERE CTT_CUSTO =
+    CASE WHEN E1.E1_TIPO = 'TX' THEN (SELECT SUBSTR(C6_CC,1,5)||'       ' FROM SC6010
+   WHERE C6_NOTA = E1.E1_NUM AND C6_FILIAL = E1.E1_FILIAL AND E1.E1_PREFIXO = C6_SERIE AND ROWNUM = 1) ELSE
+ CASE WHEN C6.C6_CC IS NULL OR C6.C6_CC = ' ' THEN SUBSTR(E1.E1_CCC,1,5)||'       ' ELSE SUBSTR(C6.C6_CC,1,5)||'       ' END END AND CTT010.D_E_L_E_T_=' ') LOCAL_CC,
+       
+(SELECT CTT_DESC01 FROM CTT010 WHERE CTT_CUSTO =
+    CASE WHEN E1.E1_TIPO = 'TX' THEN (SELECT SUBSTR(C6_CC,1,8)||'    ' FROM SC6010
+  WHERE C6_NOTA = E1.E1_NUM AND C6_FILIAL = E1.E1_FILIAL AND E1.E1_PREFIXO = C6_SERIE AND ROWNUM = 1) ELSE
+    CASE WHEN C6.C6_CC IS NULL OR C6.C6_CC = ' ' THEN SUBSTR(E1.E1_CCC,1,8)||'    ' ELSE SUBSTR(C6.C6_CC,1,8)||'    ' END END AND CTT010.D_E_L_E_T_=' ') DEPTO_CC,
+   
+(SELECT CTT_DESC01 FROM CTT010 WHERE CTT_CUSTO =
+    CASE WHEN E1.E1_TIPO = 'TX' THEN (SELECT C6_CC FROM SC6010
+ WHERE C6_NOTA = E1.E1_NUM AND C6_FILIAL = E1.E1_FILIAL AND E1.E1_PREFIXO = C6_SERIE AND ROWNUM = 1) ELSE
+    CASE WHEN C6.C6_CC IS NULL OR C6.C6_CC = ' ' THEN E1.E1_CCC ELSE C6.C6_CC END END AND CTT010.D_E_L_E_T_=' ') CENTRO_CUSTO,
+    
+   E1.E1_ORIGEM ORIGEM ,
+  (SELECT ED_DESCRIC FROM SED010 WHERE ED_CODIGO = 
+  CASE WHEN EV.EV_NATUREZ IS NULL THEN E1.E1_NATUREZ ELSE EV.EV_NATUREZ END AND D_E_L_E_T_=' ') NATUREZA,
+  
+      E1_NATUREZ,
+  
+  'RECEBER' MOVIMENTO,
+  'EM ABERTO' CONCILIADO,
+  E1.E1_NOMCLI CLIENTE,
+  
+    ROUND((CASE WHEN C6.C6_VALOR IS NULL THEN E1.E1_SALDO ELSE C6.C6_VALOR END
+  * CASE WHEN EV.EV_PERC = 1 THEN 1 WHEN (EV.EV_PERC) IS NULL THEN 1 ELSE (EV.EV_PERC) END)
+  * CASE WHEN EZ.EZ_PERC < 1 THEN EZ.EZ_PERC ELSE 1 END
+  / CASE WHEN EZ.EZ_PERC IS NULL THEN 1 ELSE (SELECT COUNT(EV_NUM) FROM SEV010 WHERE EZ.EZ_NUM = EV_NUM
+  AND EZ.EZ_FILIAL = EV_FILIAL AND EZ.EZ_PREFIXO = EV_PREFIXO
+  AND EZ.EZ_CLIFOR = EV_CLIFOR AND EZ.EZ_LOJA = EV_LOJA
+  AND D_E_L_E_T_=' ' AND EZ.EZ_PARCELA = EV_PARCELA
+  GROUP BY EV_NUM) END
+  / CASE WHEN (SELECT COUNT(E1_PARCELA) FROM SE1010 WHERE E1_NUM = E1.E1_NUM
+  AND E1_FILIAL = E1.E1_FILIAL AND E1_PREFIXO = E1.E1_PREFIXO AND E1_CLIENTE = E1.E1_CLIENTE AND E1_LOJA = E1.E1_LOJA AND SE1010.D_E_L_E_T_=' ' AND E1_TIPO != 'TX' AND E1_DESDOBR = 'S' GROUP BY E1_NUM) IS NULL THEN 1 ELSE 
+  (SELECT COUNT(E1_PARCELA) FROM SE1010 WHERE E1_NUM = E1.E1_NUM
+  AND E1_FILIAL = E1.E1_FILIAL AND E1_PREFIXO = E1.E1_PREFIXO AND E1_CLIENTE = E1.E1_CLIENTE AND E1_LOJA = E1.E1_LOJA AND SE1010.D_E_L_E_T_=' ' GROUP BY E1_NUM) END,4) CUSTO,
+
+  CASE WHEN E1.E1_SALDO > 0 AND E1.E1_SALDO < E1.E1_VALOR THEN 'PARCIAL' WHEN E1.E1_SALDO = 0 THEN 'TOTAL' ELSE 'EM ABERTO' END SALDO,
+    'SE1' TABELA,
+  ' ' AGENCIA,
+  ' ' BANCO,
+  ' ' CONTA,
+  'SE1' TIPO_DOC,
+
+  SUBSTR(E1.E1_BAIXA,7,2) DIA_EMISSAO,
+  SUBSTR(E1.E1_BAIXA,5,2) MES_EMISSAO,
+  SUBSTR(E1.E1_BAIXA,1,4) ANO_EMISSAO,
+
+  SUBSTR(E1.E1_BAIXA,7,2)||'/'||
+  SUBSTR(E1.E1_BAIXA,5,2)||'/'||
+  SUBSTR(E1.E1_BAIXA,1,4) EMISSAO,
+
+  SUBSTR(E1.E1_VENCTO,7,2) DIA_VENCIMENTO,
+  SUBSTR(E1.E1_VENCTO,5,2) MES_VENCIMENTO,
+  SUBSTR(E1.E1_VENCTO,1,4) ANO_VENCIMENTO,
+  	
+  SUBSTR(E1.E1_VENCTO,7,2)||'/'||
+  SUBSTR(E1.E1_VENCTO,5,2)||'/'||
+  SUBSTR(E1.E1_VENCTO,1,4) VENCIMENTO,
+
+
+  SUBSTR(E1.E1_BAIXA,7,2)||'/'||SUBSTR(E1.E1_BAIXA,5,2)||'/'||SUBSTR(E1.E1_BAIXA,1,4) BAIXA,
+  SUBSTR(E1.E1_BAIXA,7,2) DIA_BAIXA,
+  SUBSTR(E1.E1_BAIXA,5,2) MES_BAIXA,
+  SUBSTR(E1.E1_BAIXA,1,4) ANO_BAIXA,
+
+  E1.E1_HIST HISTORICO
+
+FROM SE1010 E1 
+  
+    FULL OUTER JOIN SC6010 C6 
+    ON C6.C6_NOTA = E1.E1_NUM
+    AND C6.C6_SERIE = E1.E1_PREFIXO
+    AND C6.C6_CLI = E1.E1_CLIENTE
+    AND E1.E1_LOJA = C6.C6_LOJA
+    AND E1.E1_FILIAL = C6.C6_FILIAL
+    AND C6.D_E_L_E_T_=' '
+       
+ FULL OUTER JOIN SEV010 EV ON EV.EV_NUM = E1.E1_NUM
+    AND EV.EV_PREFIXO = E1.E1_PREFIXO
+    AND EV.EV_CLIFOR = E1.E1_CLIENTE
+    AND EV.EV_PARCELA = E1.E1_PARCELA
+    AND E1.E1_LOJA = EV.EV_LOJA
+    AND E1.E1_FILIAL = EV.EV_FILIAL
+    AND EV.D_E_L_E_T_=' '
+    
+    LEFT OUTER JOIN SEZ010 EZ 
+    ON EZ.EZ_NUM = EV.EV_NUM
+    AND EV.EV_PREFIXO = EZ.EZ_PREFIXO
+    AND EV.EV_CLIFOR = EZ.EZ_CLIFOR
+    AND EV.EV_PARCELA = EZ.EZ_PARCELA
+    AND EV.EV_LOJA = EZ.EZ_LOJA
+    AND EV.EV_FILIAL = EZ.EZ_FILIAL
+    /*AND EV.EV_RATEICC = '1'
+    AND EZ.EZ_PERC < 1*/
+    AND EZ.D_E_L_E_T_=' ' 
+
+WHERE E1.D_E_L_E_T_=' ' AND E1.E1_PARCELA NOT IN('00','0')
+AND (E1.E1_BAIXA BETWEEN :DATA_INICIO AND :DATA_FINAL OR E1.E1_BAIXA IS NULL) AND E1.E1_SALDO >0 

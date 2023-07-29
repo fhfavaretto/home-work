@@ -1,0 +1,53 @@
+Cod. Registro  001001 "0"                                                         
+Cod. Arquivo   002002 "1"                                                         
+Ident. Arquivo 003009 "REMESSA"                                                   
+Codigo Servico 0100110"01"                                                        
+Ident. Servico 012026 "COBRANCA"                                                  
+Cod.Empresa    027038 "000000000000"                                              
+Brancos        0390460                                                            
+Nome Empresa   047076 SUBS(SM0->M0_NOMECOM,1,30)                                  
+Cod. Banco     077079 "219"                                                       
+Nome Banco     080094 "BANCO ZOGBI"                                               
+Dt. Gravacao   095100 Gravadata(dDataBase,.F.)                                    
+Brancos        101389                                                             
+Num. Arquivo   390394 RIGHT(SEE->EE_ULTDSK,5)                                     
+Num. Registro  395400 "000001"                                                    
+Codigo Registro00100101                                                           
+Cod. Inscricao 002003 02                                                          
+Num Inscricao  004017 SUBS(SM0->M0_CGC,1,14)                                      
+Cod. Empresa   018029 "010022850012"                                              
+Brancos        030037                                                             
+Uso Empresa    038062 SE1->E1_PREFIXO+SE1->E1_NUM+SE1->E1_PARCELA+"06"            
+Nosso Numero   063082 "00000000000000000000"                                      
+IDENT OPERACAO 083107                                                             
+Codigo Carteira108108 "2"                                                         
+Cod.Ocorrencia 109110 "01"                                                        
+Seu Numero     111120 SE1->E1_PREFIXO+SE1->E1_NUM+SE1->E1_PARCELA                 
+Vencimento     121126 GravaData(SE1->E1_VENCREA,.F.)                              
+Valor Titulo   1271392STRZERO(SE1->E1_VALOR*100,13,0)                             
+Bco. Deposit.  140142 "219"                                                       
+Ag.Depositaria 143147 "00000"                                                     
+Especie        148149 "01"                                                        
+Cod. Aceite    150150 "N"                                                         
+Emissao        151156 GravaData(SE1->E1_EMISSAO,.F.)                              
+Instrucao 1    157158 "02"                                                        
+Instrucao 2    159160 "06"                                                        
+Juros 1 dia    1611732"0000000000060"                                             
+Desconto Ate   174179 "000000"                                                    
+Valor Desconto 1801922"0000000000000"                                             
+Valor IOF      1932052"0000000000000"                                             
+Abatimento     2062182"0000000000000"                                             
+Cod.Inscricao  219220 IIf(Len(AllTrim(SA1->A1_CGC))==14,"02","01")                
+Num.Inscricao  221234 SA1->A1_CGC                                                 
+Nome do Sacado 235274 SUBSTR(SA1->A1_NOME,1,40)                                   
+End. Sacado    275314 IIF(EMPTY(SA1->A1_ENDCOB),SA1->A1_END,SA1->A1_ENDCOB)       
+Bairro Sacado  315326 IIF(EMPTY(SA1->A1_BAIRROC),SA1->A1_BAIRRO,SA1->A1_BAIRROC)  
+Cep Sacado     327334 IIF(EMPTY(SA1->A1_CEPC),SA1->A1_CEP,SA1->A1_CEPC)           
+Cidade Sacado  335349 IIF(EMPTY(SA1->A1_MUNC),SA1->A1_MUN,SA1->A1_MUNC)           
+Estado Sacado  350351 IIF(EMPTY(SA1->A1_ESTC),SA1->A1_EST,SA1->A1_ESTC)           
+Nome Avalista  352391                                                             
+Num. Sequencial392394 "5"                                                         
+NUM SEQUENCIAL 395400 Incrementa()                                                
+Cod. Registro  001001 9                                                           
+Brancos        002394                                                             
+Num.Sequencial 395400 Incrementa()                                                

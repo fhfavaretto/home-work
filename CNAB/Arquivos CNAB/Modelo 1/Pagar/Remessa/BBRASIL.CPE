@@ -1,0 +1,60 @@
+Banco          001003 "001"                                                       
+Lote           004007 INCREMENTAL()                                               
+Registro Header008008 "1"                                                         
+Tipo Operacao  009009 "D"                                                         
+Servico        010011 SEA->EA_TIPOPAG                                             
+Form. Lancto   012013 SEA->EA_MODELO                                              
+Layout do Lote 014016 "020"                                                       
+CNAB           017017 REPLICATE(" " ,1)                                           
+Tipo Inscr.    018018 "2"                                                         
+Numero Insc.   019032 SM0->M0_INSC                                                
+Convenio       033052 "000000"                                                    
+Cod. Agencia   053057 SA6->A6_AGENCIA                                             
+Digito Verific 058058                                                             
+Numero C.Corren059070 SA6->A6_NUMCON                                              
+Digito Ver.Cont071071                                                             
+D.Verif. Ag/Con072072                                                             
+Nome da empresa073102 Subs(SM0->M0_NOMECOM,1,30)                                  
+Mensagem       103142                                                             
+Logradouro     143172 SM0->M0_ENDCOB                                              
+Numero         173177                                                             
+Complemento    178192                                                             
+Cidade         193212 SM0->M0_CIDCOB                                              
+CEP            213217 SM0->M0_CEPCOB                                              
+Compl. CEP     218220                                                             
+Estado         221222 SM0->M0_ESTCOB                                              
+Cnab           223230 REPLICATE(" ",7)                                            
+Ocorrencias    231240 SE2->E2_OCORREN                                             
+Banco          001003 "001"                                                       
+Lote           004007 INCREMENTAL()                                               
+Registro       008008 3                                                           
+Numero registro009013 incremental()                                               
+Segmento       014014 "A"                                                         
+Tipo moviemnto 015015 0                                                           
+Codigo         016017 00                                                          
+Compensacao    018020 018                                                         
+banco favorecid021023 SA2->A2_BANCO                                               
+Codigo agencia 024029 SA2->A2_AGENCIA                                             
+Numero C/C     030043 SA2->A2_NUMCON                                              
+Nome Favorecido044073 SA2->A2_NOME                                                
+seu numero     074093 SE2->E2_NUM                                                 
+Dt lanc        094101 GRAVADATA(dDataBase,.F.)                                    
+Tipo moeda     102104 "BRL"                                                       
+Qtd moeda      1051195000000000000000                                             
+Valor lancto   1201342SE2->E2_VALOR                                               
+Nosso numero   135154 SE2->E2_NUMBCO                                              
+Data Real      155162 SE2->E2_VENCREA                                             
+Valor Real     1631772SE2->E2_VLCRUZ                                              
+informacao 2   178217                                                             
+CNAB           218229 REPLICATE(" ",12)                                           
+Aviso          230230                                                             
+Ocorrencias    231240 SE2->E2_OCORREN                                             
+Banco          001003 "001"                                                       
+Lote           004007 INCREMENTAL()                                               
+Registro       008008 "5"                                                         
+CNAB           009017 REPLICATE(" ",9)                                            
+Qtde Registros 018023 INCREMENTAL()                                               
+Valor Deb/Cred 0240412STRZERO(SOMAVALOR(),17)                                     
+Qtde Moeda     0420595"A"                                                         
+CNAB           060230 REPLICATE(" ",170)                                          
+Ocorrencias    231240 SE2->E2_OCORREN                                             

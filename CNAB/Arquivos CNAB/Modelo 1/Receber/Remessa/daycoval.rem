@@ -1,0 +1,55 @@
+Codigo Registro00100100                                                           
+Codigo Remessa 00200201                                                           
+Literal Remessa0030090'REMESSA'                                                   
+Codigo Servico 010011001                                                          
+Literal Servico0120260'COBRANCA'                                                  
+COD.EMPRESA    0270380"000000000000"                                              
+Brancos        0390460Space(08)                                                   
+Nome do Cedente0470760Subs(SM0->M0_NOMECOM,1,30)                                  
+Nro. do Banco  0770790707                                                         
+Nome do Banco  0800940"Banco Daycoval  SA"                                        
+Data Gravacao  0951000GravaData(Date(),.F.,1)                                     
+Brancos        1013940SPACE(294)                                                  
+No.Seq.Registro3954000000001                                                      
+Codigo Registro00100101                                                           
+Codigo Inscr   002003002                                                          
+Numero Inscr   0040170SM0->M0_CGC                                                 
+COD.EMPRESA    0180290"000000000000"                                              
+BRANCOS        0300370SPACE(8)                                                    
+Uso da Empresa 0380620SE1->E1_PREFIXO+SE1->E1_NUM+SE1->E1_PARCELA+"06"            
+Nosso Numero   0630700"00000000"                                                  
+BRANCOS        071107                                                             
+Tipo Carteira  10810803                                                           
+Ocorr. Remessa 1091102"01"                                                        
+Meu Número     1111200SE1->E1_PREFIXO+SE1->E1_NUM+SE1->E1_PARCELA                 
+Data Vencimento1211260GravaData(SE1->E1_VENCTO,.F.,1)                             
+Valor Titulo   1271392STRZERO(INT(ROUND(SE1->E1_VALOR*100,2)),13)                 
+Codigo Banco   1401420707                                                         
+Ag cobradora   1431460"0000"                                                      
+Dac Ag.cobrador1471470"0"                                                         
+Especie        1481490"01"                                                        
+Aceite         1501500"N"                                                         
+Dt.Emissao Tit.1511560GravaData(SE1->E1_EMISSAO,.F.,1)                            
+instrucao 1    1571580"00"                                                        
+instrucao 2    1591600"00"                                                        
+Juro Mora      1611732"0000000000000"                                             
+Data Desconto  1741790"000000"                                                    
+Valor Desconto 1801922"0000000000000"                                             
+Valor IOF      1932052"0000000000000"                                             
+Vlr. Abatimento2062182"0000000000000"                                             
+Cod.Inscr.Sacad2192200IIf(Len(AllTrim(SA1->A1_CGC))==14,"02","01")                
+Nro.Inscr.Sacad2212340SA1->A1_CGC                                                 
+Nome do Sacado 2352740SUBST(SA1->A1_NOME,1,30)                                    
+End. Sacado    2753110EXECBLOCK("END",.F.,.F.)                                    
+Branco         3123140SPACE(03)                                                   
+Bairro         3153260EXECBLOCK("BAIRRO",.F.,.F.)                                 
+Cep do Sacado  3273340IIF(!EMPTY(SA1->A1_CEPCOB),SA1->A1_CEPCOB,SA1->A1_CEP)      
+Cidade Sacado  3353490EXECBLOCK("MUN",.F.,.F.)                                    
+Estado Sacado  3503510EXECBLOCK("EST",.F.,.F.)                                    
+Mensa.Bloquete 3523910"GDC ALIMENTOS S/A"                                         
+Prazo          3923930                                                            
+Moeda          3943940"0"                                                         
+Numero sequenci395400 Incrementa()                                                
+Codigo Registro00100109                                                           
+Brancos        0023940SPACE(393)                                                  
+Numero Sequenc 3954000Incrementa()                                                

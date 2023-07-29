@@ -1,0 +1,43 @@
+CODIGOREGISTRO 0010010"0"                                                         
+CODIGOREMESSA  0020020"1"                                                         
+LITERALREMESSA 0030090"REMESSA"                                                   
+CODIGOSERVICO  0100110"03"                                                        
+LITERALSERVICO 0120250"CREDITO EM C/C"                                            
+CODIGOEMPRESA  0260290"0000"                                                      
+BRANCOS        0300460SPACE(17)                                                   
+NOMEEMPRESA    0470760SUBST(SM0->M0_NOMECOM,1,30)                                 
+CODIGOBANCO    0770790"033"                                                       
+NOMEBANCO      0800940"BANESPA        "                                           
+DATAGRAVACAO   0951000GRAVADATA(DDATABASE,.F.,2)                                  
+DENSIDADE      1011050"01600"                                                     
+LITERALDENSIDAD1061080"BPI"                                                       
+VERSAO         1091100"01"                                                        
+BRANCOS        1111940SPACE(84)                                                   
+NUMEROSEQUELC  1952000"000001"                                                    
+CODIGOREGISTRO 0010010"1"                                                         
+CODIGOINSCRICAO0020030"02"                                                        
+NUMEROINSCRICAO0040170SUBST(SM0->M0_CGC,1,14)                                     
+CODIGO EMPRESA 0180210"0000"                                                      
+BRANCOS        0220370SPACE(16)                                                   
+USO DA EMPRESA 0380620SPACE(25)                                                   
+CODIGOCREDITADO0630670SUBST(SRA->RA_BCDEPSA,6,3)+SUBS(SRA->RA_CTDEPSA,1,2)        
+CODIGOCRED.CONT0680820SUBS(SRA->RA_CTDEPSA,4,6)+SUBS(SRA->RA_CTDEPSA,11)+SPACE(8) 
+NOME           0831220SUBST(SRA->RA_NOME,1,40)                                    
+DATA           1231280GRAVADATA(DDATAPGTO,.F.,2)                                  
+VALOR          1291410NVALOR                                                      
+CODIGOSERVICO  1421440"001"                                                       
+REF.EXTRATO    1451470SPACE(3)                                                    
+BRANCOS        1481500SPACE(3)                                                    
+SINAL          1511510"C"                                                         
+BRANCOS        1521540SPACE(3)                                                    
+REG.EMPREGADO  1551680SRA->RA_MAT + SPACE(10)                                     
+BRANCOS        1691940SPACE(26)                                                   
+NUMEROSEQUENC. 1952000INCREMENTA()                                                
+CODIGOREGISTRO 0010010"9"                                                         
+BRANCOS        0021500SPACE(149)                                                  
+CAMPORESERVADO11511560"000000"                                                    
+CAMPORESERVADO21571710REPL("0",15)                                                
+QTDEREGCREDITOS1721770NTOTFUNC                                                    
+VALORTOTALCRED 1781920NTOTAL                                                      
+BRANCOS        1931940SPACE(2)                                                    
+QTDEREGTOTAL   1952000INCREMENTA()                                                

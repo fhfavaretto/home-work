@@ -1,0 +1,59 @@
+Codigo Registro00100100                                                           
+Codigo Remessa 00200201                                                           
+Literal Remessa0030090'REMESSA'                                                   
+Codigo Servico 010011001                                                          
+Literal Servico0120190'COBRANCA'                                                  
+Brancos        0200260                                                            
+Codigo Empresa 0270460EXECBLOCK("CNAB002",.F.,.F.)                                
+Nome da Empresa0470760SUBSTR(SM0->M0_NOMECOM,1,30)                                
+Codigo do Banco0770790"001"                                                       
+Nome do Banco  0800940'BANCO DO BRASIL'                                           
+Data Gravacao  0951000GravaData(dDataBase,.F.)                                    
+Sequencia Remes1011070STRZERO(VAL(SEE->EE_ULTDSK),7)                              
+Brancos        1083830                                                            
+Destino Arquivo3843850                                                            
+Origem BBCBR   3863880                                                            
+Brancos        3893940                                                            
+Numero Sequenc.3954000000001                                                      
+Codigo Registro00100101                                                           
+Codigo Inscr   002003002                                                          
+Numero CGC     0040170SM0->M0_CGC                                                 
+Codigo Empresa 0180370EXECBLOCK("CNAB002",.F.,.F.)                                
+Numero Titulo  0380620SE1->E1_PREFIXO+SE1->E1_NUM+SE1->E1_PARCELA+"06"            
+Nosso Numero   0630740SE1->E1_NUMBCO                                              
+Numero Prestac 075076000                                                          
+Indicativo Grup077078000                                                          
+Brancos        0790820                                                            
+Seu Numero     0830850"AI "                                                       
+Variacao       0861060"0190000000000000"                                          
+Carteira       1071080EXECBLOCK("CNAB001",.F.,.F.)                                
+Registro titulo1091100"01"                                                        
+Numero Titulo  1111200SE1->E1_PREFIXO+SE1->E1_NUM+SE1->E1_PARCELA                 
+Vencimento     1211260SE1->E1_VENCTO                                              
+Valor Titulo   1271390EXECBLOCK("CNAB004",.F.)                                    
+Banco          1401420001                                                         
+Cobradora      143147000000                                                       
+Especie Titulo 1481490"01"                                                        
+Aceite         1501500"N"                                                         
+Emissao Titulo 1511560SE1->E1_EMISSAO                                             
+Inst. Codfi. 011571580IF(SUBST(SE1->E1_VEND1,1,4)='1072',04,SEE->EE_INSTPRI)      
+Inst. Codfi. 021591600SEE->EE_INSTSEC                                             
+Juros Mora Dia 1611732STRZERO(Round((SE1->E1_VALJUR*100),0),13)                   
+Data Descontos 1741790000000                                                      
+Valor Descontos18019200000000000000                                               
+Valor IOF      1932050STRZERO(0,11)+"09"                                          
+Valor Abatiment2062180                                                            
+Tipo CGC / CPF 2192200IF(RIGHT(SA1->A1_CGC,2)= '  ',01,02)                        
+CGC Do Cliente 2212340SA1->A1_CGC                                                 
+Nome Cliente   2352740SUBS(SA1->A1_NOME,1,37)                                     
+Endereco Sacado2753110EXECBLOCK("CNAB007",.F.,.F.,1)                              
+Brancos        3123260                                                            
+Cep            3273340EXECBLOCK("CNAB007",.F.,.F.,2)                              
+Municipio      3353490EXECBLOCK("CNAB007",.F.,.F.,3)                              
+Estado         3503510EXECBLOCK("CNAB007",.F.,.F.,4)                              
+Observacoes    3523910SPACE(40)                                                   
+Qtde dias Prote3923940                                                            
+Numero Seq.    3954000Incrementa()                                                
+Codigo Registro00100109                                                           
+Brancos        0023940                                                            
+Numero Sequenc 3954000Incrementa()                                                

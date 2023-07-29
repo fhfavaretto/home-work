@@ -1,0 +1,61 @@
+Codigo Registro00100100                                                           
+Codigo Remessa 00200201                                                           
+Literal Remessa0030090'REMESSA'                                                   
+Codigo Servico 010011001                                                          
+Literal Servico0120260'COBRANCA'                                                  
+Brancos        027028000                                                          
+Tipo Arquivo   02902901                                                           
+Nro do Convenio0300370"00000000"                                                  
+Brancos        0380460Space(09)                                                   
+Nome do Cedente0470760Subs(SM0->M0_NOMECOM,1,30)                                  
+Nro. do Banco  0770790479                                                         
+Nome do Banco  0800940"BANK BOSTON"                                               
+Data Gravacao  0951000GravaData(Date(),.F.,1)                                     
+Densidade      101105000000                                                       
+Unid.Densidade 1061080"BPI"                                                       
+Brancos        1091990SPACE(91)                                                   
+No.Contr.Caucao2002070"00000000"                                                  
+Brancos        2083940SPACE(187)                                                  
+No.Seq.Registro3954000000001                                                      
+Codigo Registro00100101                                                           
+Codigo Inscr   002003002                                                          
+Numero Inscr   0040170SM0->M0_CGC                                                 
+Brancos        0180370SPACE(20)                                                   
+Uso da Empresa 0380620SE1->E1_PREFIXO+SE1->E1_NUM+SE1->E1_PARCELA+"06"            
+Nosso Numero   0630710"000000000"                                                 
+Vlr.Dia Antecip0720822                                                            
+Brancos        0830830SPACE(01)                                                   
+Codigo Moeda   0840870"R$  "                                                      
+Uso do Banco   0881070SPACE(20)                                                   
+Tipo Carteira  10810804                                                           
+Ocorr. Remessa 1091102"01"                                                        
+Meu Número     1111200SE1->E1_PREFIXO+SE1->E1_NUM+SE1->E1_PARCELA                 
+Data Vencimento1211260GravaData(SE1->E1_VENCTO,.F.,1)                             
+Valor Titulo   1271392STRZERO(INT(ROUND(SE1->E1_VALOR*100,2)),13)                 
+Codigo Banco   1401420479                                                         
+Brancos        1431470SPACE(05)                                                   
+Cod.Ident.Tit. 1481490"DM"                                                        
+Identif.Titulo 1501500"A"                                                         
+Dt.Emissao Tit.1511560GravaData(SE1->E1_EMISSAO,.F.,1)                            
+Cod.Instrucao  1571580"01"                                                        
+Nro Dias Instru1591600"05"                                                        
+Juro Mora      1611732STRZERO(INT(SE1->E1_VALJUR*100),13)                         
+Data Desconto  1741790SPACE(6)                                                    
+Valor Desconto 1801922"0000000000000"                                             
+Valor IOF      1932052"0000000000000"                                             
+Vlr. Abatimento2062182"0000000000000"                                             
+Cod.Inscr.Sacad2192200IIf(Len(AllTrim(SA1->A1_CGC))==14,"02","01")                
+Nro.Inscr.Sacad2212340SA1->A1_CGC                                                 
+Nome do Sacado 2352740SA1->A1_NOME                                                
+End. Sacado    2753110EXECBLOCK("END",.F.,.F.)                                    
+Branco         3123140SPACE(03)                                                   
+Compl.Meu Nro. 3153260SPACE(12)                                                   
+Cep do Sacado  3273340IIF(!EMPTY(SA1->A1_CEPCOB),SA1->A1_CEPCOB,SA1->A1_CEP)      
+Cidade Sacado  3353490EXECBLOCK("MUN",.F.,.F.)                                    
+Estado Sacado  3503510EXECBLOCK("EST",.F.,.F.)                                    
+Mensa.Bloquete 3523910SPACE(40)                                                   
+Brancos        3923940SPACE(03)                                                   
+Nro.Seq.Registr3954000Incrementa()                                                
+Codigo Registro00100109                                                           
+Brancos        0023940SPACE(393)                                                  
+Numero Sequenc 3954000Incrementa()                                                

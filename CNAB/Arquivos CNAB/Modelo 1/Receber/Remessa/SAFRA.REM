@@ -1,0 +1,65 @@
+Cod. Registro  001001 "0"                                                         
+Cod. Arquivo   002002 "1"                                                         
+Ident. Arquivo 003009 "REMESSA"                                                   
+Codigo Servico 0100110"01"                                                        
+Ident. Servico 012019 "COBRANCA"                                                  
+Brancos        020026                                                             
+Cod.Empresa    027040 "00000000000000"                                            
+Brancos        0410460                                                            
+Nome Empresa   047076 SUBS(SM0->M0_NOMECOM,1,30)                                  
+Cod. Banco     077079 "422"                                                       
+Nome Banco     080090 "BANCO SAFRA"                                               
+Brancos        091094                                                             
+Dt. Gravacao   095100 Gravadata(dDataBase,.F.)                                    
+Brancos        101391                                                             
+Num. Arquivo   392394 "000"                                                       
+Num. Registro  395400 "000001"                                                    
+Codigo Registro00100101                                                           
+Cod. Inscricao 002003 02                                                          
+Num Inscricao  004017 SUBS(SM0->M0_CGC,1,14)                                      
+Cod. Empresa   018031 "00000000000000"                                            
+Brancos        032037                                                             
+Uso Empresa    038062 SE1->E1_PREFIXO+SE1->E1_NUM+SE1->E1_PARCELA+"06"            
+Nosso Numero   063071 "000000000"                                                 
+Brancos        072101                                                             
+Codigo IOF     102102 "0"                                                         
+Cod. Moeda     103104 "00"                                                        
+Brancos        105105                                                             
+Instrucao 3    106107 "05"                                                        
+Codigo Carteira108108 "1"                                                         
+Cod.Ocorrencia 109110 "01"                                                        
+Seu Numero     111120 SE1->E1_PREFIXO+SE1->E1_NUM+SE1->E1_PARCELA                 
+Vencimento     121126 GravaData(SE1->E1_VENCREA,.F.)                              
+Valor Titulo   1271392STRZERO(SE1->E1_VALOR*100,13,0)                             
+Bco. Deposit.  140142 "422"                                                       
+Ag.Depositaria 143147 "00200"                                                     
+Especie        148149 "01"                                                        
+Cod. Aceite    150150 "N"                                                         
+Emissao        151156 GravaData(SE1->E1_EMISSAO,.F.)                              
+Instrucao 1    157158 "01"                                                        
+Instrucao 2    159160 "10"                                                        
+Juros 1 dia    1611732STRZERO(SE1->E1_VALOR*GETMV('MV_TXPER'),13)                 
+Desconto Ate   174179 "000000"                                                    
+Valor Desconto 1801922"0000000000000"                                             
+Valor IOF      1932052"0000000000000"                                             
+Abatimento     2062182"0000000000000"                                             
+Cod.Inscricao  219220 "02"                                                        
+Num.Inscricao  221234 SA1->A1_CGC                                                 
+Nome do Sacado 235274 SUBSTR(SA1->A1_NOME,1,30)                                   
+End. Sacado    275314 IIF(EMPTY(SA1->A1_ENDCOB),SA1->A1_END,SA1->A1_ENDCOB)       
+Bairro Sacado  315324 IIF(EMPTY(SA1->A1_BAIRROC),SA1->A1_BAIRRO,SA1->A1_BAIRROC)  
+Brancos        325326                                                             
+Cep Sacado     327334 IIF(EMPTY(SA1->A1_CEPC),SA1->A1_CEP,SA1->A1_CEPC)           
+Cidade Sacado  335349 IIF(EMPTY(SA1->A1_MUNC),SA1->A1_MUN,SA1->A1_MUNC)           
+Estado Sacado  350351 IIF(EMPTY(SA1->A1_ESTC),SA1->A1_EST,SA1->A1_ESTC)           
+Nome Avalista  352381 SUBS(SM0->M0_NOMECOM,1,30)                                  
+Brancos        382388                                                             
+Banco Emitente 389391 "422"                                                       
+Num. Arquivo   392394 "000"                                                       
+Num. Sequencial395400 Incrementa()                                                
+Cod. Registro  001001 9                                                           
+Brancos        002368                                                             
+Quantidade     369376 Incrementa()-2                                              
+Valor Total    3773912STRZERO(INT(SOMAVALOR()),15)                                
+Num. Arquivo   392394                                                             
+Num.Sequencial 395400 Incrementa()                                                

@@ -1,0 +1,64 @@
+CODIGO REGISTRO00100100                                                           
+CODIGO REMESSA 00200201                                                           
+LITERAL REMESSA0030090"REMESSA"                                                   
+CODIGO SERVICO 010011001                                                          
+LITERAL SERVICO0120260"COBRANCA"                                                  
+NUMERO AGENCIA 0270300PADL(ALLTRIM(SEE->EE_AGENCIA),4,"0")                        
+MODALID. CONTA 0310320"04"                                                        
+NUMERO CONTA   0330400PADL(ALLTRIM(STRTRAN(SEE->EE_CONTA,"-","")),8,"0")          
+VAGO           0410460""                                                          
+NOME DO CLIENTE0470760UPPER(SUBSTR(SM0->M0_NOMECOM,1,30))                         
+CODIGO DO BANCO0770790151                                                         
+NOME DO BANCO  0800940"NC-NB"                                                     
+DATA  GRAVACAO 0951000GRAVADATA(DDATABASE,.F.)                                    
+VAGO           1013890""                                                          
+NUM. SEQU. ARQU3903940"00000"                                                     
+NUM.SEQ.REGISTR3954000"000001"                                                    
+CODIGO REGISTRO00100101                                                           
+VAGO           0020170""                                                          
+NUMERO AGENCIA 0180210PADL(ALLTRIM(SEE->EE_AGENCIA),4,"0")                        
+MODALID. CONTA 0220230"04"                                                        
+NUMERO CONTA   0240310PADL(ALLTRIM(STRTRAN(SEE->EE_CONTA,"-","")),8,"0")          
+VAGO           0320350""                                                          
+COMPL.NOSSO NUM0360370"00"                                                        
+USO EMPRESA    0380620"S"+SE1->E1_PREFIXO+SE1->E1_NUM+SE1->E1_PARCELA+SE1->E1_TIPO
+NOSSO NUMERO   0630690"0000000"                                                   
+DIGIT NOSSO NUM0700700"0"                                                         
+NUM. CONTRATO  0710800"0000000000"                                                
+COD. DE TARIFA 0810820"00"                                                        
+COD. DE REAPRES0830830"0"                                                         
+VAGO           0841070""                                                          
+COD. CARTEIRA  10810801                                                           
+CODIGO SERVICO 1091100"01"                                                        
+SEU NUMERO     1111200SE1->E1_PREFIXO+SE1->E1_NUM+SE1->E1_PARCELA                 
+DATA VENCTO    1211260GRAVADATA(SE1->E1_VENCTO,.F.)                               
+VALOR TITULO   1271390STRZERO(ROUND(SE1->E1_SALDO,2)*100,13)                      
+COBRADORA      1401460"0000000"                                                   
+VAGO           1471470""                                                          
+ESPECIE        1481490TABELA("Z2",ALLTRIM(SE1->E1_TIPO))                          
+ACEITE         1501500"N"                                                         
+DATA EMISSAO   1511560GRAVADATA(SE1->E1_EMISSAO,.F.)                              
+INSTRUCAO      1571600"0019"                                                      
+CODIGO MORA    1611610"0"                                                         
+VALOR MORA     1621730STRZERO(ROUND(SE1->E1_VALJUR,2)*100,12)                     
+DATA VECTO DESC1741790"000000"                                                    
+VALOR DESCONTO 1801920"0000000000000"                                             
+VALOR DO IOC   1932050"0000000000000"                                             
+ABATIMENTO     2062180STRZERO(ROUND(SE1->E1_X_VLABA,2)*100,13)                    
+TIPO INSCRICAO 2192200IIF(LEN(ALLTRIM(SA1->A1_CGC)) >= 14,"02","01")              
+NUMERO INSCRICA2212340STRZERO(VAL(SA1->A1_CGC),14)                                
+NOME DO SACADO 2352710SUBSTR(SA1->A1_NOME,1,37)                                   
+SUFIXO DO CEP  2722740SUBSTR(SA1->A1_CEPC,6,3)                                    
+ENDERECO SACADO2753140SUBSTR(SA1->A1_ENDCOB,1,40)                                 
+VAGO           3153290""                                                          
+CEP            3303340SUBSTR(SA1->A1_CEPC,1,5)                                    
+CIDADE         3353490SUBSTR(SA1->A1_MUNC,1,15)                                   
+ESTADO         3503510SA1->A1_ESTC                                                
+NUMERO SACADOR 3523610""                                                          
+SACADOR        3623910""                                                          
+PRAZO PROTESTO 3923930"00"                                                        
+CODIGO MOEDA   3943940"0"                                                         
+NUMERO SEQUENCI3954000STRZERO(INCREMENTA(),6)                                     
+CODIGO REGISTRO00100109                                                           
+VAGO           0023940""                                                          
+NUM. SEQUENC   3954000STRZERO(INCREMENTA(),6)                                     

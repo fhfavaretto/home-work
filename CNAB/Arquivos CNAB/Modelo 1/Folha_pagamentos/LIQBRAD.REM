@@ -1,0 +1,40 @@
+COD. REGISTRO  001001 "0"                                                         
+COD. REMESSA   002002 "1"                                                         
+LITERAL 1      003009 "REMESSA"                                                   
+COD. SERVICO   010011 "03"                                                        
+LITERAL 2      012026 "CREDITO C/C    "                                           
+COD. AGENCIA   027031 "0000-0"                                                    
+NUMERO DO RAZAO032036 "00000"                                                     
+NUMERO DA CONTA037043 "0000000"                                                   
+DIGITO DA CONTA044044 "3"                                                         
+ID. EMPRESA    045045 " "                                                         
+RESERVA        046046 " "                                                         
+COD. EMPRESA   047051 "00000"                                                     
+NOME DA EMPRESA052076 SUBS(SM0->M0_NOMECOM,1,25)                                  
+COD. DO BANCO  077079 "237"                                                       
+NOME DO BANCO  080094 "BRADESCO       "                                           
+DATA GRAVACAO  095100 GRAVADATA(DDATABASE,.T.,2)                                  
+DENS. GRAVACAO 101105 "00144"                                                     
+LITERAL 3      106108 "BPI"                                                       
+DATA DEBITO    109114 GRAVADATA(DDATAPGTO,.T.,2)                                  
+BRANCOS        115194 SPACE(80)                                                   
+NUMERO SEQ.    195200 "000001"                                                    
+COD. REGISTRO  001001 "1"                                                         
+RESERVA        002062 SPACE(61)                                                   
+COD. AGENCIA   063067 SUBS(SRA->RA_BCDEPSA,4,5)                                   
+NUMERO RAZAO   068072 "00000"                                                     
+NUMERO C/C.    073080 SUBS(SRA->RA_CTDEPSA,1,8)                                   
+RESERVA        081082 "  "                                                        
+NOME           083122 SUBS(SRA->RA_NOME,1,30)                                     
+COD. FUNC.     123128 SRA->RA_MAT                                                 
+VALOR          129141 NValor                                                      
+COD. SERVICO   142144 "298"                                                       
+RESERVA        145150 SPACE(6)                                                    
+RESERVA        151194 SPACE(44)                                                   
+SEQUENCIAL     195200 INCREMENTA()                                                
+Nosso Numero                                                                      
+Cod Rejeicao                                                                      
+COD. REGISTRO  001001 "9"                                                         
+VALOR          002014 NTOTAL                                                      
+RESERVA        015194 SPACE(177)                                                  
+SEQUENCIAL     195200 INCREMENTA()                                                

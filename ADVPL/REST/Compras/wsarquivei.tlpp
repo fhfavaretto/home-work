@@ -1,0 +1,58 @@
+#include 'totvs.ch'
+
+/*
+https://app.arquivei.com.br/nfe/list
+Login: contabil@ecotecfumigation.com
+Senha: Ecotec2021 – E é maiúsculo
+*/
+
+/*
+API-ID: d015f86cb78e8d7cc2257f03632ac326852e56dc
+API-KEY: 9e12c2691f6646575e25c27df8f4a77529948b4d
+SandBox id: https://sandbox-api.arquivei.com.br
+
+*/
+
+
+
+
+
+#Include "Protheus.ch"
+
+User Function ConnectToArquivei()
+
+	Local oRestClient as object
+	local aHeadOut as array
+	Local cPath := "D:\memowrite\testeArray.txt"
+	aHeadOut = {}
+
+	Aadd(aHeadOut, "X-API-ID: d015f86cb78e8d7cc2257f03632ac326852e56dc")
+	Aadd(aHeadOut, "X-API-KEY: 9e12c2691f6646575e25c27df8f4a77529948b4d")
+	Aadd(aHeadOut, "Content-Type: application/json")
+
+	// parametros da requisição
+	oRestClient := FWRest():New("https://sandbox-api.arquivei.com.br")
+	oRestClient:setPath("/v1/nfe/received")
+
+	if oRestClient:Get(aHeadOut)
+		ConOut(oRestClient:GetResult())
+		//Transforma json em Vetor para manipulação
+
+		cJsonTexto := oRestClient:GetResult()
+
+		Jdados := JsonObject():New()
+
+		aXMLS =	Jdados:GetJsonObject('data')
+		Jdados:GetJsonObject('access_key')
+		Jdados:GetJsonObject('xml')
+
+	else
+		ConOut(oRestClient:GetLastError())
+	endif
+
+return
+
+
+
+
+

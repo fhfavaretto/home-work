@@ -1,0 +1,48 @@
+IDENTIFICACAO  1  3   "PAY"                                                       
+NUMERO DO PAIS 4  6   "000"                                                       
+CONTA DO CLIEN 7  16  "0000000000"                                                
+DATA PAGTO     17 22  GRAVADATA(SE2->E2_VENCREA,.F.,4)                            
+TIPO PAGTO     23 25  "0"+SEA->EA_TIPOPAG                                         
+REFERENCIA     26 40  SE2->E2_PREFIXO+SE2->E2_NUM+SE2->E2_PARCELA+SE2->E2_TIPO    
+N.SEQUENCIA    41 48  Incrementa()-1                                              
+CGC BENEF.     49 62  IIF(!EMPTY(SA2->A2_CGC),SA2->A2_CGC,"00000000000000")       
+MOEDA          63 65  "R$"                                                        
+CODIGO CLIENTE 66 75  SA2->A2_COD                                                 
+VALOR PGTO     76 90 0(SE2->E2_VALOR*100)                                         
+RESERVADO      91 96  "000000"                                                    
+DESCRICAO 1    97 126 TABELA("Z1",SEA->EA_TIPOPAG)                                
+DESCRICAO 2    127156                                                             
+RESERVADO      157162 "000000"                                                    
+TIPO DE DOC.   163164 "01"                                                        
+TIPO CONTA BENF165166 "01"                                                        
+NOME BENEF.    167246 SA2->A2_NOME                                                
+END.BENEF.     247276 SA2->A2_END                                                 
+CIDADE BENEF.  277291 SA2->A2_MUN                                                 
+ESTADO BENEF.  292293 SA2->A2_EST                                                 
+CEP BENEF.     294301 IIF(!EMPTY(SA2->A2_CEP),SA2->A2_CEP,"00000000")             
+TELEFONE BENEF.302312 "00000000000"                                               
+NUM.BCO.BENEF. 313315 IIF(SEA->EA_TIPOPAG=="71",SA2->A2_BANCO,"000")              
+AGENCIA BENEF. 316319 EXECBLOCK("CODAG",.F.,.F.)                                  
+RESERVADO      320323                                                             
+CONTA BENEF.   324338 EXECBLOCK("PBAN",.F.,.F.)                                   
+RESERVADO      339339                                                             
+TIPO CONTA BENE340341 IIF(SEA->EA_TIPOPAG=="71","01","00")                        
+END.BCO.BENEF  342371                                                             
+CIDADE.BCO.BENE372386                                                             
+UF.BCO.BENEF   387388                                                             
+FAX.BCO.BENEF  389398                                                             
+NOTIFI.P/FAX   399418                                                             
+DEP.P/FAX.     419433                                                             
+CC.CITY.BENEF  434443 EXECBLOCK("CTATRAN",.F.,.F.)                                
+TIPO CC CITY BE444445 IIF(SEA->EA_TIPOPAG=="72","01","00")                        
+FILIAL DESTINO 446448 "001"                                                       
+N.TITULO-COD.BA449498 se2->e2_codbarr                                             
+COD.ATIVIDADE  499503 "00000"                                                     
+E-MAIL BENEF   504548 SA2->A2_EMAIL                                               
+RESERVADO      549600 SPACE(52)                                                   
+IDENT.REGISTRO 1  3   "TRL"                                                       
+TOTAL REG.PAGTO4  18  INCREMENTA()-2                                              
+VALOR TOTAL    19 33  SOMAVALOR()                                                 
+RESERVADO      34 48  REPLICATE("0",15)                                           
+TOTAL REGISTROS49 63  INCREMENTA()-2                                              
+RESERVADO      64 100 SPACE(37)                                                   

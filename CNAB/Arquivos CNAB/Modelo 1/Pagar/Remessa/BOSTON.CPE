@@ -1,0 +1,58 @@
+Registro Header00100100                                                           
+Arquivo Remessa00200201                                                           
+Arquivo Extenso0030090"REMESSA"                                                   
+Tipo Servico   010011011                                                          
+Servico Extenso0120260"PAGAMENTOS"                                                
+Convenio BKB Cl0270340SA6->A6_COD                                                 
+Filler         0350370                                                            
+Agenc BKB Conv 0380440SA6->A6_AGENCIA                                             
+Filler         0450460                                                            
+Nome Cliente   0470760Subs(SM0->M0_NOMECOM,1,30)                                  
+No Bco Compens 0770790"479"                                                       
+Nome Banco     0800940"BANCO DE BOSTON"                                           
+Dta Grav Arquiv0951000GravaData(dDataBase,.F.,1)                                  
+Filler         1013890                                                            
+No Seq Arquivo 3903940SEE->EE_ULTDSK                                              
+No Seq Registro3954000000001                                                      
+Registro Detalh00100101                                                           
+Codigo CFG/CGC 0020030"01"                                                        
+Numero CPF/CGC 0040170SM0->M0_CGC                                                 
+No. Conv BKB   0180250SA6->A6_COD+Space(5)                                        
+Filler         0260280                                                            
+Ag BKB Convenio0290350Substr(SA6->A6_AGENCIA,1,5)                                 
+Filler         0360620                                                            
+No CPF/CGC Forn0630760SA2->A2_CGC                                                 
+Tipo Compromis 0770790TABELA("17",SE2->E2_TIPO)                                   
+Ident Compromis0800890SE2->E2_PREFIXO+SE2->E2_NUM+SE2->E2_PARCELA                 
+Seq Compromisso0900900                                                            
+Ident Servico  0910920"TA"                                                        
+Filler         0931070                                                            
+Cod Operacao   1081080"C"                                                         
+Tipo Operacao  1091100SE2->E2_OCORREN                                             
+Filler         1111200                                                            
+Data Vencimento1211260GravaData(SE2->E2_VENCREA,.F.,1)                            
+Valor Orig Tit 1271390INT((XMOEDA(SE2->E2_VALOR,SE2->E2_MOEDA,1))*100)            
+Tipo Pagamento 1401420TABELA("59",SEA->EA_TIPOPAG)                                
+Banco Destinat 1431450Iif(trim(SEA->EA_TIPOPAG)=="DOC",SA2->A2_BANCO,"   ")       
+Agencia Destin 1461520Substr(SA2->A2_AGENCIA,1,5)                                 
+Cam Compens Des1531550                                                            
+C.C. Destinat  1561650SA2->A2_NUMCON                                              
+Nome Ag Destin 1661850Iif(Trim(SEA->EA_TIPOPAG)=="DOC",SA6->A6_NREDUZ,SpaCE(5))   
+Ag BKB Convenio1861920Substr(SA6->A6_AGENCIA,1,5)                                 
+Nome Fornecedor1932450SA2->A2_NOME+Space(13)                                      
+Filler         2462500                                                            
+Valor Abatiment25126300                                                           
+Uso do Banco   2643470                                                            
+Juros/Multa    3483600                                                            
+Data Pagamento 3613660GravaData(dDataBase,.F.,1)                                  
+Valor Pagto    3673790INT((XMOEDA(SE2->E2_SALDO,SE2->E2_MOEDA,1))*100)            
+Moeda Compromis3803830"R$"                                                        
+Pre Cadast Forn3843840"N"                                                         
+Filler         3853940                                                            
+Num Seq Regist 3954000Incrementa()                                                
+Reg Trailer    00100109                                                           
+Somat CGC/CPF  0020190SomaCgc()                                                   
+Somat Vlr Orig 0200370SomaValor()                                                 
+Somat Data Pagt0380550SomaData()                                                  
+Filler         0563940                                                            
+No. Sequenc    3954000Incrementa()                                                

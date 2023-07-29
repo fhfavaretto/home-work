@@ -1,0 +1,34 @@
+COD.REGISTRO   001001 "0"                                                         
+CONTROLE       002009 SPACE(8)                                                    
+TIPO SERVICO   010011 "03"                                                        
+DESCRICAO      012026 "CREDITO EM C/C"                                            
+NOME DA EMPRESA027046 SUBS(SM0->M0_NOMECOM,1,20)                                  
+CONTROLE       047076 SPACE(30)                                                   
+CODIGO DO BANCO077079 "275"                                                       
+NOME DO BANCO  080094 "BANCO REAL S/A "                                           
+DATA DA GERACAO095100 GRAVADATA(DDATABASE,.T.,2)                                  
+DENS.GRAVACAO  101105 "1600"                                                      
+UNID.DENSIDADE 106108 "BPI"                                                       
+COTNROLE1      109194 SPACE(86)                                                   
+SEQUENCIA      195200 "000001"                                                    
+TIPO REGISTRO  001001   "1"                                                       
+COD.INSC.EMPR. 002003 "01"                                                        
+INSCRICAO      004017 SM0->M0_CGC                                                 
+NOME EMPRESA   018037 SUBSTR(SM0->M0_NOMECOM,1,20)                                
+ID.LANCAMENTO  038062 SPACE(25)                                                   
+CODIGO AGENCIA 063066 SUBST(SRA->RA_BCDEPSA,4,4)                                  
+CONTA CORRENTE 067074 SUBST(SRA->RA_CTDEPSA,1,8)                                  
+CONTROLE       075082 SPACE(8)                                                    
+NOME CREDITADO 083122 SUBST(SRA->RA_NOME,1,40)                                    
+DATA CREDITO   123128 GRAVADATA(DDATAPGTO,.T.,2)                                  
+VALOR          129141 NVALOR                                                      
+TIPO SERVICO   142144 "001"                                                       
+CONTROLE1      145150 SPACE(6)                                                    
+COD.AG.EMPRESA 151154 "9999"                                                      
+C/C EMPRESA    155161 "9999999"                                                   
+DAC            162162 "9"                                                         
+CONTROLE2      163194 SPACE(32)                                                   
+SEQUENCIAL     195200 INCREMENTA()                                                
+TIPO REGISTRO  001001 "9"                                                         
+CONTROLE       002194 SPACE(193)                                                  
+SEQUENCIAL     195200 INCREMENTA()                                                
